@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visor Interactivo del Proyecto Kingdom Barber</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutral Tech -->
+    <!-- Application Structure Plan: Se ha diseñado una SPA estilo dashboard con una barra de navegación lateral fija. Esta estructura permite al usuario acceder directamente a cualquier sección clave del proyecto (Visión General, Módulos, Arquitectura, Flujo de Datos) sin un scroll lineal. Se eligió este enfoque para desglosar un sistema de software complejo en partes manejables e interactivas, facilitando la comprensión de cómo los tres componentes principales (Frontend, Backend, Panel de Análisis) se interrelacionan. La interactividad se centra en la exploración de los módulos y en un visualizador paso a paso del flujo de datos, lo que es más efectivo que leer texto estático. -->
+    <!-- Visualization & Content Choices: 1. Diagrama de Arquitectura: Objetivo: Informar sobre la estructura general. Método: Bloques HTML/CSS (no SVG) para representar los 3 módulos y la base de datos. Interacción: Hover para resaltar y mostrar tooltips. Justificación: Visualización clara y ligera de la relación entre componentes. 2. Explorador de Módulos: Objetivo: Organizar y detallar cada subsistema. Método: Pestañas interactivas que cargan dinámicamente el contenido de cada módulo. Interacción: Clic en pestañas para cambiar la vista. Justificación: Mantiene la interfaz limpia y enfocada, permitiendo la comparación directa. 3. Visualizador de Flujo de Datos: Objetivo: Explicar un proceso clave (creación de cita). Método: Un secuenciador interactivo paso a paso. Interacción: Botones "Siguiente/Anterior" que resaltan cada etapa del flujo. Justificación: Convierte una lista de pasos en una experiencia de aprendizaje guiada y atractiva. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f7f4;
+            color: #4a4a4a;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c5a880;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #b39160;
+        }
+        .nav-link {
+            transition: all 0.3s ease;
+        }
+        .nav-link.active {
+            background-color: #c5a880;
+            color: #ffffff;
+            font-weight: 600;
+        }
+        .nav-link:not(.active):hover {
+            background-color: #eaddc7;
+            color: #4a4a4a;
+        }
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .content-section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .tab.active {
+            border-bottom: 2px solid #c5a880;
+            color: #c5a880;
+            font-weight: 600;
+        }
+        .flow-step.active {
+            background-color: #eaddc7;
+            transform: scale(1.03);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden">
+
+    <aside class="w-64 bg-[#2c2a29] text-white flex flex-col p-4 shadow-lg flex-shrink-0">
+        <div class="text-center mb-10">
+            <h1 class="text-2xl font-bold text-[#c5a880]">Kingdom Barber</h1>
+            <p class="text-sm text-gray-400">Visor del Proyecto</p>
+        </div>
+        <nav id="main-nav" class="flex flex-col space-y-2">
+            <a href="#overview" class="nav-link active px-4 py-2 rounded-lg text-left"><span class="mr-2">🏠</span> Visión General</a>
+            <a href="#modules" class="nav-link px-4 py-2 rounded-lg text-left"><span class="mr-2">🧩</span> Módulos del Sistema</a>
+            <a href="#architecture" class="nav-link px-4 py-2 rounded-lg text-left"><span class="mr-2">🏗️</span> Arquitectura</a>
+            <a href="#data-flow" class="nav-link px-4 py-2 rounded-lg text-left"><span class="mr-2">↔️</span> Flujo de Datos</a>
+            <a href="#tech-stack" class="nav-link px-4 py-2 rounded-lg text-left"><span class="mr-2">💻</span> Stack Tecnológico</a>
+            <a href="#objectives" class="nav-link px-4 py-2 rounded-lg text-left"><span class="mr-2">🎯</span> Objetivos</a>
+            <a href="#conclusions" class="nav-link px-4 py-2 rounded-lg text-left"><span class="mr-2">📜</span> Conclusiones</a>
+        </nav>
+        <div class="mt-auto text-center text-xs text-gray-500">
+            <p>Institución Técnica CESDE</p>
+            <p>2025</p>
+        </div>
+    </aside>
+
+    <main id="main-content" class="flex-1 overflow-y-auto p-6 md:p-10">
+        
+        <section id="overview" class="content-section active">
+            <h2 class="text-3xl font-bold text-[#2c2a29] mb-4">Visión General del Proyecto</h2>
+            <p class="mb-6 text-gray-600">Kingdom Barber es una plataforma digital integral diseñada para transformar y modernizar la gestión de barberías. La solución se compone de tres sistemas interconectados que ofrecen una experiencia fluida tanto para clientes como para administradores, optimizando desde la reserva de citas hasta la toma de decisiones estratégicas basadas en datos.</p>
+            
+            <div class="bg-white p-6 rounded-xl shadow-md">
+                <h3 class="text-xl font-semibold mb-4 text-[#c5a880]">Diagrama de Alto Nivel</h3>
+                <div class="flex flex-col md:flex-row items-center justify-around space-y-4 md:space-y-0 md:space-x-4">
+                    
+                    <div class="text-center p-4 border-2 border-dashed border-gray-200 rounded-lg w-full md:w-1/4">
+                        <div class="text-4xl">🌐</div>
+                        <h4 class="font-bold mt-2">Plataforma Web</h4>
+                        <p class="text-xs text-gray-500">(Next.js)</p>
+                    </div>
+
+                    <div class="text-2xl text-[#c5a880] font-mono">&lt;--&gt;</div>
+
+                    <div class="text-center p-4 border-2 border-solid border-[#c5a880] rounded-lg w-full md:w-1/3 shadow-inner bg-amber-50">
+                        <div class="text-4xl">🧠</div>
+                        <h4 class="font-bold mt-2">Backend & API</h4>
+                        <p class="text-xs text-gray-500">(Spring Boot)</p>
+                    </div>
+                    
+                    <div class="text-2xl text-[#c5a880] font-mono">&lt;--&gt;</div>
+
+                    <div class="text-center p-4 border-2 border-dashed border-gray-200 rounded-lg w-full md:w-1/4">
+                        <div class="text-4xl">📊</div>
+                        <h4 class="font-bold mt-2">Panel de Análisis</h4>
+                        <p class="text-xs text-gray-500">(Python/Streamlit)</p>
+                    </div>
+                </div>
+                <div class="flex justify-center mt-4">
+                    <div class="text-2xl text-[#c5a880] transform -rotate-90 md:rotate-0">▲</div>
+                </div>
+                <div class="flex justify-center">
+                     <div class="text-center p-4 bg-gray-700 text-white rounded-lg w-full md:w-1/2 mt-4">
+                        <div class="text-4xl">💾</div>
+                        <h4 class="font-bold mt-2">Base de Datos</h4>
+                        <p class="text-xs text-gray-400">(SQL)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="modules" class="content-section">
+            <h2 class="text-3xl font-bold text-[#2c2a29] mb-6">Módulos del Sistema</h2>
+            <div class="bg-white p-6 rounded-xl shadow-md">
+                <div id="tabs" class="flex border-b border-gray-200 mb-6">
+                    <button class="tab py-2 px-4 text-gray-500 focus:outline-none active" data-target="module-backend">Backend y API</button>
+                    <button class="tab py-2 px-4 text-gray-500 focus:outline-none" data-target="module-frontend">Plataforma Web</button>
+                    <button class="tab py-2 px-4 text-gray-500 focus:outline-none" data-target="module-analytics">Panel de Gestión</button>
+                </div>
+                <div id="tab-content">
+                </div>
+            </div>
+        </section>
+
+        <section id="architecture" class="content-section">
+            <h2 class="text-3xl font-bold text-[#2c2a29] mb-4">Diseño de la Arquitectura</h2>
+            <p class="mb-6 text-gray-600">El proyecto está diseñado bajo una arquitectura de componentes desacoplados, donde cada módulo tiene una responsabilidad única y se comunica a través de una API RESTful. Este enfoque garantiza escalabilidad, mantenibilidad y flexibilidad.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-[#c5a880]">
+                    <h3 class="font-bold text-lg mb-2">Backend (Núcleo)</h3>
+                    <p class="text-sm">Componente central en Spring Boot (Java) que aloja la lógica de negocio, gestiona los datos (usuarios, citas) y expone la API REST. Utiliza un patrón MVC adaptado y se estructura en controladores, modelos (JPA) y repositorios.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-blue-400">
+                    <h3 class="font-bold text-lg mb-2">Frontend (Cliente)</h3>
+                    <p class="text-sm">Capa de presentación en Next.js (React) que consume los datos del backend para renderizar una interfaz dinámica e interactiva. Su estructura se basa en el App Router de Next.js, separando páginas, componentes y lógica.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-green-400">
+                    <h3 class="font-bold text-lg mb-2">Panel de Administración (Análisis)</h3>
+                    <p class="text-sm">Aplicación independiente en Python (Streamlit) para análisis de datos e inteligencia de negocio. Se conecta a la misma fuente de datos para generar visualizaciones y ejecutar modelos de IA sin afectar el rendimiento de la app principal.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="data-flow" class="content-section">
+            <h2 class="text-3xl font-bold text-[#2c2a29] mb-4">Flujo de Datos: Creación de una Cita</h2>
+            <p class="mb-6 text-gray-600">Este es un ejemplo del flujo de datos cliente-servidor estándar al momento de agendar una nueva cita en la plataforma. Utiliza los botones para navegar paso a paso a través del proceso.</p>
+            <div class="bg-white p-6 rounded-xl shadow-md">
+                <div class="flex justify-between items-center mb-6">
+                    <button id="prev-step" class="bg-[#2c2a29] text-white px-4 py-2 rounded-lg hover:bg-black transition disabled:opacity-50">&lt; Anterior</button>
+                    <span id="step-counter" class="font-semibold text-lg text-gray-700">Paso 1 de 6</span>
+                    <button id="next-step" class="bg-[#c5a880] text-white px-4 py-2 rounded-lg hover:bg-[#b39160] transition disabled:opacity-50">Siguiente &gt;</button>
+                </div>
+                <div id="flow-steps-container" class="space-y-4">
+                </div>
+            </div>
+        </section>
+
+        <section id="tech-stack" class="content-section">
+            <h2 class="text-3xl font-bold text-[#2c2a29] mb-6">Stack Tecnológico Consolidado</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <h3 class="font-bold text-lg mb-4 border-b pb-2 text-[#c5a880]">Backend</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li>Java</li>
+                        <li>Spring Boot</li>
+                        <li>Spring Data JPA</li>
+                        <li>Hibernate</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <h3 class="font-bold text-lg mb-4 border-b pb-2 text-blue-400]">Frontend</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li>Next.js</li>
+                        <li>React</li>
+                        <li>TypeScript</li>
+                        <li>Tailwind CSS</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <h3 class="font-bold text-lg mb-4 border-b pb-2 text-green-400]">Análisis de Datos</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li>Python</li>
+                        <li>Streamlit</li>
+                        <li>Pandas</li>
+                        <li>Plotly</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <h3 class="font-bold text-lg mb-4 border-b pb-2 text-gray-500]">Base de Datos</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li>H2 (Desarrollo)</li>
+                        <li>SQL (Producción)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="objectives" class="content-section">
+            <h2 class="text-3xl font-bold text-[#2c2a29] mb-6">Objetivos del Proyecto</h2>
+            <div class="bg-white p-6 rounded-xl shadow-md mb-6">
+                <h3 class="font-semibold text-xl mb-2 text-[#c5a880]">Objetivo General</h3>
+                <p>Mejorar la eficiencia operativa de las barberías mediante la digitalización de la gestión de reservas y la comunicación con los clientes, ofreciendo una experiencia personalizada y aumentando la satisfacción del cliente.</p>
+            </div>
+             <div class="bg-white p-6 rounded-xl shadow-md">
+                <h3 class="font-semibold text-xl mb-4 text-[#c5a880]">Objetivos Específicos</h3>
+                <ul class="space-y-3">
+                    <li class="flex items-start"><span class="mr-3 text-[#c5a880]">🛡️</span> <div><span class="font-semibold">Seguridad y Acceso:</span> Desarrollar un sistema de autenticación robusto (registro, login, recuperación).</div></li>
+                    <li class="flex items-start"><span class="mr-3 text-[#c5a880]">🧭</span> <div><span class="font-semibold">Usabilidad y Navegación:</span> Crear una interfaz intuitiva con menús, búsqueda y filtros.</div></li>
+                    <li class="flex items-start"><span class="mr-3 text-[#c5a880]">📅</span> <div><span class="font-semibold">Gestión de Reservas:</span> Implementar un sistema de citas completo con calendario y recordatorios.</div></li>
+                    <li class="flex items-start"><span class="mr-3 text-[#c5a880]">👤</span> <div><span class="font-semibold">Experiencia Personalizada:</span> Ofrecer personalización de perfiles, temas y notificaciones.</div></li>
+                    <li class="flex items-start"><span class="mr-3 text-[#c5a880]">💬</span> <div><span class="font-semibold">Comunicación Directa:</span> Facilitar la interacción con chat en vivo y soporte.</div></li>
+                    <li class="flex items-start"><span class="mr-3 text-[#c5a880]">🛒</span> <div><span class="font-semibold">Venta y Promoción:</span> Integrar funcionalidades de e-commerce y gestión de ofertas.</div></li>
+                </ul>
+             </div>
+        </section>
+        
+        <section id="conclusions" class="content-section">
+            <h2 class="text-3xl font-bold text-[#2c2a29] mb-6">Conclusiones del Proyecto</h2>
+            <div class="bg-white p-6 rounded-xl shadow-md space-y-4 text-gray-700">
+                <p>A lo largo del desarrollo del proyecto Kingdom Barber, se lograron avances significativos que, a pesar de los desafíos, culminaron en una solución cohesiva gracias a la colaboración constante y al enfoque ágil adoptado.</p>
+                <ul class="list-disc list-inside space-y-2">
+                    <li><span class="font-semibold">Evolución del diseño:</span> El enfoque inicial en la usabilidad y estética permitió ajustar la maquetación progresivamente para mejorar la experiencia del usuario final.</li>
+                    <li><span class="font-semibold">Importancia de la comunicación:</span> Las reuniones periódicas y revisiones fueron cruciales para mantener la alineación del equipo, resolver problemas técnicos y tomar decisiones informadas de manera eficiente.</li>
+                    <li><span class="font-semibold">Adaptabilidad ante los cambios:</span> La flexibilidad del equipo fue esencial para incorporar nuevas propuestas y reestructurar tareas, lo que simplificó el desarrollo y mejoró la calidad del producto.</li>
+                    <li><span class="font-semibold">Desarrollo de funcionalidades clave:</span> Se priorizó un enfoque iterativo, comenzando por las funcionalidades esenciales (reservas, login) y añadiendo progresivamente más características para dar forma a la plataforma.</li>
+                    <li><span class="font-semibold">Lecciones aprendidas:</span> El proyecto enseñó la importancia de la colaboración para superar estancamientos técnicos, la necesidad de estimar tiempos de manera realista y el valor de las múltiples perspectivas para encontrar soluciones eficaces.</li>
+                </ul>
+                 <p class="pt-4 border-t border-gray-200">En resumen, el proyecto no solo ha entregado una solución tecnológica funcional, sino que también ha sentado las bases para futuras expansiones, asegurando que Kingdom Barber pueda seguir evolucionando y adaptándose a las tendencias del mercado.</p>
+            </div>
+        </section>
+
+    </main>
+    
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    const modulesData = {
+        'module-backend': {
+            title: 'Backend y API Central (PI_MOVIL2)',
+            description: 'Es el corazón del sistema, desarrollado con Spring Boot y Java. Gestiona toda la lógica, los datos y la seguridad a través de una API REST.',
+            features: [
+                'Expone un conjunto de endpoints RESTful para gestionar clientes, barberos, sedes, servicios y citas.',
+                'Ofrece la lógica para reservar, visualizar, modificar y cancelar citas desde el cliente.',
+                'Proporciona un panel donde los barberos pueden iniciar sesión por sede y visualizar su agenda de forma ordenada.'
+            ]
+        },
+        'module-frontend': {
+            title: 'Plataforma Web para Clientes (PI_WEB2)',
+            description: 'Es la cara visible del proyecto, construida con Next.js, React y TypeScript para ofrecer una experiencia de usuario excepcional.',
+            features: [
+                'Incluye un calendario interactivo para seleccionar sede, barbero y servicios.',
+                'Ofrece un catálogo detallado de servicios y un mapa interactivo para geolocalización.',
+                'Un dashboard exclusivo donde los barberos pueden gestionar su agenda y publicar una galería de sus trabajos.',
+                'Incluye sistema de registro e inicio de sesión seguro y un formulario de contacto.'
+            ]
+        },
+        'module-analytics': {
+            title: 'Panel de Gestión y Análisis de Datos (PI_NTP)',
+            description: 'Herramienta estratégica en Python con Streamlit, diseñada para el análisis de datos y la administración del negocio.',
+            features: [
+                'Ofrece una vista panorámica del rendimiento con KPIs y filtros avanzados en tiempo real.',
+                'Permite la búsqueda y consulta detallada del historial de citas con filtros combinables.',
+                'Integra un Asistente de IA para generar reportes, responder preguntas sobre datos y crear textos de marketing.'
+            ]
+        }
+    };
+
+    const flowStepsData = [
+        { title: 'Cliente (Frontend)', description: 'El usuario rellena el formulario de reserva en la interfaz de Next.js y hace clic en "Agendar".' },
+        { title: 'Petición (Fetch API)', description: 'El frontend empaqueta los datos en un objeto JSON y envía una petición POST a la API del backend (`/api/citas`).' },
+        { title: 'Controlador (Backend)', description: 'El `CitaController.java` en Spring Boot recibe la petición. El cuerpo JSON se convierte automáticamente en un objeto Java (`Cita`).' },
+        { title: 'Lógica y Persistencia', description: 'El controlador invoca al `CitaRepository`, que utiliza Spring Data JPA para insertar una nueva fila en la tabla de citas de la base de datos.' },
+        { title: 'Respuesta (Backend)', description: 'El backend devuelve una respuesta JSON al frontend con un código de estado `201 CREATED`, confirmando la creación de la cita.' },
+        { title: 'Actualización de UI', description: 'El frontend recibe la confirmación y actualiza la interfaz para mostrar al usuario que su cita ha sido agendada con éxito.' }
+    ];
+    let currentStep = 0;
+
+    const navLinks = document.querySelectorAll('#main-nav a');
+    const contentSections = document.querySelectorAll('.content-section');
+    
+    const tabs = document.querySelectorAll('.tab');
+    const tabContentContainer = document.getElementById('tab-content');
+
+    const prevStepBtn = document.getElementById('prev-step');
+    const nextStepBtn = document.getElementById('next-step');
+    const stepCounter = document.getElementById('step-counter');
+    const flowStepsContainer = document.getElementById('flow-steps-container');
+
+    function showSection(hash) {
+        contentSections.forEach(section => {
+            if ('#' + section.id === hash) {
+                section.classList.add('active');
+            } else {
+                section.classList.remove('active');
+            }
+        });
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === hash) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+    }
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetHash = e.currentTarget.getAttribute('href');
+            history.pushState(null, null, targetHash);
+            showSection(targetHash);
+        });
+    });
+    
+    window.addEventListener('popstate', () => {
+        showSection(window.location.hash || '#overview');
+    });
+
+    function updateTabContent(targetId) {
+        const data = modulesData[targetId];
+        if (!data) return;
+
+        tabContentContainer.innerHTML = `
+            <div class="prose max-w-none">
+                <h3 class="font-bold text-xl text-[#2c2a29]">${data.title}</h3>
+                <p class="text-gray-600">${data.description}</p>
+                <h4 class="font-semibold mt-4">Funcionalidades Principales:</h4>
+                <ul class="list-disc list-inside text-gray-600 space-y-1">
+                    ${data.features.map(feature => `<li>${feature}</li>`).join('')}
+                </ul>
+            </div>
+        `;
+    }
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', (e) => {
+            tabs.forEach(t => t.classList.remove('active'));
+            const clickedTab = e.currentTarget;
+            clickedTab.classList.add('active');
+            updateTabContent(clickedTab.dataset.target);
+        });
+    });
+    
+    function renderFlowSteps() {
+        flowStepsContainer.innerHTML = '';
+        flowStepsData.forEach((step, index) => {
+            const stepEl = document.createElement('div');
+            stepEl.className = `flow-step p-4 border rounded-lg transition-all duration-300 ${index === currentStep ? 'active' : 'bg-gray-50'}`;
+            stepEl.innerHTML = `
+                <h4 class="font-semibold">${index + 1}. ${step.title}</h4>
+                ${index === currentStep ? `<p class="text-sm mt-2 text-gray-700">${step.description}</p>` : ''}
+            `;
+            flowStepsContainer.appendChild(stepEl);
+        });
+        stepCounter.textContent = `Paso ${currentStep + 1} de ${flowStepsData.length}`;
+        prevStepBtn.disabled = currentStep === 0;
+        nextStepBtn.disabled = currentStep === flowStepsData.length - 1;
+    }
+
+    prevStepBtn.addEventListener('click', () => {
+        if (currentStep > 0) {
+            currentStep--;
+            renderFlowSteps();
+        }
+    });
+
+    nextStepBtn.addEventListener('click', () => {
+        if (currentStep < flowStepsData.length - 1) {
+            currentStep++;
+            renderFlowSteps();
+        }
+    });
+
+    showSection(window.location.hash || '#overview');
+    updateTabContent('module-backend');
+    renderFlowSteps();
+});
+</script>
+</body>
+</html>
