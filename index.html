@@ -99,13 +99,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const app = {
         // --- ESTADO Y CONFIGURACIÓN ---
         
-        // Elementos del DOM que se usarán frecuentemente
         elements: {
             mainNav: document.getElementById('main-nav'),
             mainContent: document.getElementById('main-content'),
         },
 
-        // Datos para generar la navegación y las secciones
         sectionsData: [
             { id: 'overview', title: 'Visión General', icon: '🏠', active: true },
             { id: 'slideshow', title: 'Presentación Detallada', icon: '📺' },
@@ -118,7 +116,6 @@ document.addEventListener('DOMContentLoaded', function () {
             { id: 'glossary', title: 'Glosario Técnico', icon: '📖' }
         ],
 
-        // Datos para las diapositivas
         slidesData: [
             {
                 id: 'slide-1',
@@ -128,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <p class="text-xl text-gray-700 mb-6">Las barberías que dependen de métodos manuales enfrentan barreras significativas para crecer y satisfacer al cliente moderno. Estos problemas incluyen:</p>
                     <ul class="space-y-3 text-lg">
                         <li class="flex items-start"><span class="mr-3 text-red-500">❌</span><div><strong>Pérdida de Citas:</strong> Dificultad para coordinar agendas y riesgo de errores humanos.</div></li>
-                        <li class="flex items-start"><span class="mr-3 text-red-500">❌</span><div><strong>Comunicación Limitada:</strong> Falta de canales directos para recordatorios y promociones.</div></li>
+                        <li class="flex items-start"><span class="mr-3 text-red-500">❌</span><div><strong>Comunicación Limitada:</strong> Falta de canales directos para recordatorios.</div></li>
                         <li class="flex items-start"><span class="mr-3 text-red-500">❌</span><div><strong>Carencia de Datos:</strong> Imposibilidad de analizar tendencias para tomar decisiones informadas.</div></li>
                     </ul>
                     <p class="text-xl text-gray-800 mt-8 p-4 bg-green-100 border-l-4 border-green-500 rounded-r-lg">
@@ -157,12 +154,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 content: `
                     <p class="text-xl text-gray-700 mb-6">Desarrollado con <strong>Spring Boot (Java)</strong>, este módulo es el pilar que soporta toda la operación. Su responsabilidad es crucial:</p>
                     <ul class="space-y-4 text-lg text-gray-700">
-                        <li><strong class="text-amber-700">API RESTful:</strong> Expone endpoints seguros y bien definidos para que el Frontend y el Panel de Análisis consuman y manipulen los datos (clientes, barberos, citas, etc.).</li>
+                        <li><strong class="text-amber-700">API RESTful:</strong> Expone endpoints seguros para que el Frontend y el Panel de Análisis consuman y manipulen los datos.</li>
                         <li><strong class="text-amber-700">Lógica de Negocio:</strong> Centraliza todas las reglas operativas, como la validación de horarios y la gestión de disponibilidad.</li>
-                        <li><strong class="text-amber-700">Persistencia de Datos:</strong> Utiliza <strong>Spring Data JPA y Hibernate</strong> para interactuar con la base de datos de forma eficiente, realizando operaciones CRUD de manera segura.</li>
+                        <li><strong class="text-amber-700">Persistencia de Datos:</strong> Utiliza <strong>Spring Data JPA y Hibernate</strong> para interactuar con la base de datos de forma eficiente.</li>
                     </ul>
                     <div class="mt-6 p-4 bg-gray-200 rounded-lg text-gray-800">
-                        <code class="text-sm"><strong>Patrón MVC Adaptado:</strong> Se estructura en Controladores (endpoints), Modelos (entidades JPA) y Repositorios (operaciones de datos), garantizando un código organizado y mantenible.</code>
+                        <code class="text-sm"><strong>Patrón MVC Adaptado:</strong> Se estructura en Controladores, Modelos y Repositorios, garantizando un código organizado y mantenible.</code>
                     </div>`
             },
             {
@@ -200,47 +197,28 @@ document.addEventListener('DOMContentLoaded', function () {
                     <ul class="space-y-4 text-lg">
                         <li><strong class="text-green-700">Dashboard Interactivo:</strong> Ofrece una vista panorámica del rendimiento con KPIs y filtros para analizar datos en tiempo real.</li>
                         <li><strong class="text-green-700">Gestión de Citas:</strong> Permite consultar el historial completo de citas con filtros avanzados.</li>
-                        <li><strong class="text-green-700">Asistente de Inteligencia Artificial:</strong> El componente más innovador, con un LLM capaz de:
-                            <ul class="list-circle list-inside ml-6 mt-2 text-base space-y-1">
-                                <li>Generar reportes ejecutivos en PDF.</li>
-                                <li>Responder preguntas sobre los datos en lenguaje natural.</li>
-                                <li>Crear textos persuasivos para campañas de marketing.</li>
-                                <li>Detectar proactivamente oportunidades de negocio.</li>
-                            </ul>
-                        </li>
+                        <li><strong class="text-green-700">Asistente de Inteligencia Artificial:</strong> El componente más innovador, con un LLM capaz de generar reportes, responder preguntas sobre los datos y crear textos persuasivos para marketing.</li>
                     </ul>`
             }
         ],
 
         // --- MÉTODOS DE LA APLICACIÓN ---
 
-        /**
-         * Inicializa la aplicación: genera la navegación, el contenido y añade los listeners.
-         */
         init() {
             this.buildLayout();
             this.renderAllSections();
             this.attachNavListeners();
-
-            // Inicializa los componentes interactivos de cada sección
-            this.initSlideshow();
-            this.initDataFlow();
-            this.initModulesTabs();
+            this.initInteractiveComponents();
         },
 
-        /**
-         * Construye la navegación y los contenedores de sección una sola vez.
-         */
         buildLayout() {
             this.sectionsData.forEach(section => {
-                // Crear enlace de navegación
                 const navLink = document.createElement('a');
                 navLink.href = `#${section.id}`;
                 navLink.className = `nav-link px-4 py-3 rounded-lg text-left text-base ${section.active ? 'active' : ''}`;
                 navLink.innerHTML = `<span class="mr-3 text-lg">${section.icon}</span>${section.title}`;
                 this.elements.mainNav.appendChild(navLink);
 
-                // Crear contenedor de sección
                 const sectionContainer = document.createElement('section');
                 sectionContainer.id = section.id;
                 sectionContainer.className = `content-section ${section.active ? 'active' : ''}`;
@@ -248,9 +226,6 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         },
         
-        /**
-         * Adjunta los listeners a los enlaces de navegación.
-         */
         attachNavListeners() {
             this.elements.mainNav.querySelectorAll('.nav-link').forEach(link => {
                 link.addEventListener('click', (e) => {
@@ -267,31 +242,35 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             });
         },
+
+        initInteractiveComponents() {
+            this.initSlideshow();
+            this.initDataFlow();
+            this.initModulesTabs();
+        },
         
-        /**
-         * Renderiza el contenido HTML de todas las secciones.
-         */
         renderAllSections() {
-            // -- Visión General --
+            // -- Visión General (MEJORADA) --
             document.getElementById('overview').innerHTML = `
                 <h2 class="text-4xl font-bold mb-6" style="font-family: var(--font-display);">Visión General del Proyecto</h2>
                 <div class="bg-white p-8 rounded-2xl shadow-lg space-y-8">
                     <div>
                         <h3 class="text-2xl font-semibold mb-3 text-amber-600">1. Resumen del Proyecto</h3>
-                        <p class="text-lg leading-relaxed text-gray-700">En el competitivo sector del cuidado personal, la experiencia del cliente y la eficiencia operativa son diferenciadores clave. <strong>Kingdom Barber</strong> nace como una <strong>plataforma digital integral</strong>, diseñada para transformar y modernizar la gestión de barberías. Su objetivo es ofrecer una solución robusta que no solo simplifique la administración de citas, sino que también enriquezca la interacción con el cliente y proporcione herramientas avanzadas para la toma de decisiones estratégicas.</p>
+                        <p class="text-lg leading-relaxed text-gray-700">En el competitivo sector del cuidado personal, la experiencia del cliente y la eficiencia operativa son diferenciadores clave. <strong>Kingdom Barber</strong> nace como una <strong>plataforma digital integral</strong>, diseñada para transformar y modernizar la gestión de barberías. Su objetivo es ofrecer una solución robusta que no solo simplifique la administración, sino que también enriquezca la interacción con el cliente y proporcione herramientas avanzadas para la toma de decisiones estratégicas.</p>
                     </div>
                     <div class="border-t pt-8">
                         <h3 class="text-2xl font-semibold mb-3 text-amber-600">2. Planteamiento del Problema</h3>
-                        <p class="text-lg leading-relaxed text-gray-700">La gestión tradicional de barberías enfrenta desafíos significativos en la era digital. La dependencia de procesos manuales y la falta de análisis de datos resultan en una menor eficiencia. La acelerada adopción digital ha subrayado la necesidad crítica de implementar soluciones que garanticen <strong>seguridad, comodidad y personalización</strong>.</p>
+                        <p class="text-lg leading-relaxed text-gray-700">La gestión tradicional de barberías enfrenta desafíos significativos en la era digital. La dependencia de procesos manuales, la comunicación ineficiente y la falta de análisis de datos resultan en una menor eficiencia operativa. La acelerada adopción digital ha subrayado la necesidad crítica de implementar soluciones que garanticen <strong>seguridad, comodidad y personalización</strong>.</p>
                     </div>
                     <div class="border-t pt-8">
-                        <h3 class="text-2xl font-semibold mb-4 text-amber-600">3. Solución Propuesta</h3>
-                        <p class="mb-6 text-lg text-gray-700">La solución de Kingdom Barber es una plataforma unificada que digitaliza y optimiza las operaciones a través de tres sistemas interconectados que funcionan de manera sinérgica:</p>
-                        <ul class="space-y-4">
-                            <li class="flex items-start"><div class="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mr-4 text-lg">🌐</div><div><strong class="block text-gray-800">Plataforma Web para Clientes (Next.js):</strong> Garantiza una experiencia de usuario fluida e intuitiva.</div></li>
-                            <li class="flex items-start"><div class="flex-shrink-0 w-8 h-8 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mr-4 text-lg">🧠</div><div><strong class="block text-gray-800">Backend y API Central (Spring Boot):</strong> Actúa como el cerebro de la operación, gestionando la lógica de negocio y la seguridad.</div></li>
-                            <li class="flex items-start"><div class="flex-shrink-0 w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center mr-4 text-lg">📊</div><div><strong class="block text-gray-800">Panel de Gestión y Análisis (Python/Streamlit):</strong> Ofrece una visión profunda del rendimiento del negocio e integra un innovador Asistente de IA.</div></li>
-                        </ul>
+                        <h3 class="text-2xl font-semibold mb-4 text-amber-600">3. Solución y Objetivos Clave</h3>
+                        <p class="mb-6 text-lg text-gray-700">La solución es una plataforma unificada que digitaliza y optimiza las operaciones a través de tres sistemas interconectados. Este enfoque busca cumplir con los siguientes pilares:</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-lg">
+                            <div class="flex items-start"><span class="mr-4 text-2xl text-amber-500 mt-1">🛡️</span><div><strong class="block text-gray-800">Seguridad y Acceso:</strong> Garantizar un sistema de autenticación robusto para proteger los datos de usuarios.</div></div>
+                            <div class="flex items-start"><span class="mr-4 text-2xl text-amber-500 mt-1">🧭</span><div><strong class="block text-gray-800">Usabilidad y Navegación:</strong> Crear una interfaz de usuario intuitiva para una experiencia fluida y sin fricciones.</div></div>
+                            <div class="flex items-start"><span class="mr-4 text-2xl text-amber-500 mt-1">📅</span><div><strong class="block text-gray-800">Gestión de Reservas Eficiente:</strong> Implementar un sistema de citas completo con un calendario interactivo y recordatorios automáticos.</div></div>
+                            <div class="flex items-start"><span class="mr-4 text-2xl text-amber-500 mt-1">👤</span><div><strong class="block text-gray-800">Experiencia Personalizada:</strong> Ofrecer opciones para que los usuarios configuren notificaciones y exploren un catálogo detallado.</div></div>
+                        </div>
                     </div>
                 </div>`;
             
@@ -306,7 +285,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <div class="bg-white p-6 rounded-2xl shadow-lg">
                     <div class="slides-container" aria-live="polite">${slidesHTML}</div>
                     <div class="flex justify-between items-center mt-6">
-                        <button id="slideshow-prev" class="bg-stone-800 text-white px-5 py-2 rounded-lg hover:bg-black transition disabled:opacity-50 disabled:cursor-not-allowed" aria-label="Diapositiva anterior">&larr; Anterior</button>
+                        <button id="slideshow-prev" class="bg-stone-800 text-white px-5 py-2 rounded-lg hover:bg-black transition disabled:opacity-50" aria-label="Diapositiva anterior">&larr; Anterior</button>
                         <span id="slideshow-counter" class="font-semibold text-lg text-gray-700">Diapositiva 1 de ${this.slidesData.length}</span>
                         <button id="slideshow-next" class="bg-amber-500 text-white px-5 py-2 rounded-lg hover:bg-amber-600 transition" aria-label="Siguiente diapositiva">Siguiente &rarr;</button>
                     </div>
@@ -316,12 +295,7 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('architecture').innerHTML = `
                 <h2 class="text-4xl font-bold mb-6" style="font-family: var(--font-display);">Diseño de la Arquitectura</h2>
                 <div class="bg-white p-8 rounded-2xl shadow-lg">
-                    <p class="text-lg mb-8 text-gray-700 leading-relaxed">El proyecto está diseñado bajo una <strong>arquitectura de componentes desacoplados</strong>, un enfoque moderno que consiste en construir el sistema como un conjunto de servicios independientes. Cada módulo tiene una responsabilidad única y se comunica a través de una <strong>API RESTful</strong> bien definida. Este paradigma es clave para garantizar:</p>
-                    <ul class="list-disc list-inside space-y-2 mb-8 text-lg text-gray-700">
-                        <li><strong>Escalabilidad:</strong> Cada componente puede crecer y ser optimizado de forma independiente.</li>
-                        <li><strong>Mantenibilidad:</strong> Las actualizaciones en un módulo no afectan directamente a los otros.</li>
-                        <li><strong>Flexibilidad Tecnológica:</strong> Permite usar la mejor tecnología para cada tarea específica.</li>
-                    </ul>
+                    <p class="text-lg mb-8 text-gray-700 leading-relaxed">El proyecto está diseñado bajo una <strong>arquitectura de componentes desacoplados</strong>, un enfoque que garantiza escalabilidad, mantenibilidad y flexibilidad. Cada módulo tiene una responsabilidad única y se comunica a través de una <strong>API RESTful</strong>.</p>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-amber-500 hover:shadow-xl transition-shadow"><h3 class="font-bold text-xl mb-2 text-amber-600">Backend (Núcleo)</h3><p class="text-base">Componente central en <strong>Spring Boot (Java)</strong> que aloja la lógica de negocio, gestiona los datos y expone la API REST.</p></div>
                         <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-blue-400 hover:shadow-xl transition-shadow"><h3 class="font-bold text-xl mb-2 text-blue-600">Frontend (Cliente)</h3><p class="text-base">Capa de presentación en <strong>Next.js (React)</strong> que consume los datos del backend para renderizar una interfaz dinámica.</p></div>
@@ -358,27 +332,27 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('tech-stack').innerHTML = `
                 <h2 class="text-4xl font-bold mb-6" style="font-family: var(--font-display);">Stack Tecnológico Consolidado</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow"><h3 class="font-bold text-2xl mb-4 border-b-2 pb-2 border-amber-500 text-amber-600">Backend</h3><ul class="space-y-3 text-lg"><li><strong>Java:</strong> Lenguaje robusto y de alto rendimiento.</li><li><strong>Spring Boot:</strong> Framework para crear APIs RESTful rápidas.</li><li><strong>Spring Data JPA:</strong> Simplifica el acceso a datos.</li><li><strong>Hibernate:</strong> Mapeo objeto-relacional (ORM).</li></ul></div>
-                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow"><h3 class="font-bold text-2xl mb-4 border-b-2 pb-2 border-blue-400 text-blue-600">Frontend</h3><ul class="space-y-3 text-lg"><li><strong>Next.js:</strong> Framework de React para rendimiento y SEO.</li><li><strong>React:</strong> Biblioteca para interfaces interactivas.</li><li><strong>TypeScript:</strong> Añade tipado estático para robustez.</li><li><strong>Tailwind CSS:</strong> Framework CSS para diseño rápido.</li></ul></div>
-                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow"><h3 class="font-bold text-2xl mb-4 border-b-2 pb-2 border-green-400 text-green-600">Análisis de Datos</h3><ul class="space-y-3 text-lg"><li><strong>Python:</strong> Lenguaje líder en ciencia de datos e IA.</li><li><strong>Streamlit:</strong> Crea aplicaciones web de datos.</li><li><strong>Pandas:</strong> Biblioteca para manipulación de datos.</li><li><strong>Plotly:</strong> Para crear visualizaciones interactivas.</li></ul></div>
-                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow"><h3 class="font-bold text-2xl mb-4 border-b-2 pb-2 border-gray-500 text-gray-600">Base de Datos</h3><ul class="space-y-3 text-lg"><li><strong>H2 Database:</strong> Ideal para desarrollo y pruebas rápidas.</li><li><strong>SQL (Producción):</strong> Diseño preparado para PostgreSQL o MySQL.</li></ul></div>
+                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow"><h3 class="font-bold text-2xl mb-4 border-b-2 pb-2 border-amber-500 text-amber-600">Backend</h3><ul class="space-y-3 text-lg"><li><strong>Java & Spring Boot:</strong> Para una lógica de negocio sólida y segura.</li><li><strong>Spring Data JPA & Hibernate:</strong> Para la gestión de datos eficiente.</li></ul></div>
+                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow"><h3 class="font-bold text-2xl mb-4 border-b-2 pb-2 border-blue-400 text-blue-600">Frontend</h3><ul class="space-y-3 text-lg"><li><strong>Next.js, React & TypeScript:</strong> Para una interfaz rápida, interactiva y robusta.</li><li><strong>Tailwind CSS:</strong> Para un diseño moderno y responsivo.</li></ul></div>
+                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow"><h3 class="font-bold text-2xl mb-4 border-b-2 pb-2 border-green-400 text-green-600">Análisis y IA</h3><ul class="space-y-3 text-lg"><li><strong>Python & Streamlit:</strong> Para crear el panel interactivo de forma ágil.</li><li><strong>Pandas & Plotly:</strong> Para manipulación y visualización de datos.</li></ul></div>
+                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow"><h3 class="font-bold text-2xl mb-4 border-b-2 pb-2 border-gray-500 text-gray-600">Base de Datos</h3><ul class="space-y-3 text-lg"><li><strong>H2 (Desarrollo):</strong> Para agilidad en pruebas y desarrollo.</li><li><strong>SQL (Producción):</strong> Diseño preparado para escalar a PostgreSQL o MySQL.</li></ul></div>
                 </div>`;
             
-            // -- Objetivos --
+            // -- Objetivos (Detallados) --
             document.getElementById('objectives').innerHTML = `
-                <h2 class="text-4xl font-bold mb-6" style="font-family: var(--font-display);">Objetivos del Proyecto</h2>
+                <h2 class="text-4xl font-bold mb-6" style="font-family: var(--font-display);">Objetivos Detallados del Proyecto</h2>
                 <div class="bg-white p-8 rounded-2xl shadow-lg mb-8">
                     <h3 class="font-semibold text-2xl mb-3 text-amber-600">Objetivo General</h3>
-                    <p class="text-lg leading-relaxed">Mejorar la eficiencia operativa de las barberías mediante la digitalización de la gestión de reservas y la comunicación, ofreciendo una experiencia personalizada que aumente la retención y satisfacción del cliente.</p>
+                    <p class="text-lg leading-relaxed">Mejorar la eficiencia operativa de las barberías mediante la digitalización de la gestión de reservas y la comunicación con los clientes, ofreciendo una experiencia personalizada y aumentando la satisfacción del cliente.</p>
                 </div>
                 <div class="bg-white p-8 rounded-2xl shadow-lg">
                     <h3 class="font-semibold text-2xl mb-6 text-amber-600">Objetivos Específicos</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
-                        <div class="flex items-start"><span class="mr-4 text-2xl text-amber-500">🛡️</span><div><strong class="block text-gray-800 text-lg">Seguridad y Acceso:</strong> Desarrollar un sistema de autenticación robusto.</div></div>
-                        <div class="flex items-start"><span class="mr-4 text-2xl text-amber-500">🧭</span><div><strong class="block text-gray-800 text-lg">Usabilidad y Navegación:</strong> Crear una interfaz de usuario intuitiva y fluida.</div></div>
-                        <div class="flex items-start"><span class="mr-4 text-2xl text-amber-500">📅</span><div><strong class="block text-gray-800 text-lg">Gestión de Reservas:</strong> Implementar un sistema de citas completo con calendario interactivo.</div></div>
-                        <div class="flex items-start"><span class="mr-4 text-2xl text-amber-500">👤</span><div><strong class="block text-gray-800 text-lg">Experiencia Personalizada:</strong> Ofrecer opciones de personalización de perfil y notificaciones.</div></div>
-                        <div class="flex items-start"><span class="mr-4 text-2xl text-amber-500">💬</span><div><strong class="block text-gray-800 text-lg">Comunicación Directa:</strong> Facilitar la interacción a través de chat, email y redes sociales.</div></div>
+                        <div class="flex items-start"><span class="mr-4 text-2xl text-amber-500">🛡️</span><div><strong class="block text-gray-800 text-lg">Seguridad y Acceso:</strong> Desarrollar un sistema de autenticación y seguridad robusto que incluya inicio de sesión, registro de nuevos usuarios y recuperación de contraseñas.</div></div>
+                        <div class="flex items-start"><span class="mr-4 text-2xl text-amber-500">🧭</span><div><strong class="block text-gray-800 text-lg">Usabilidad y Navegación:</strong> Crear una interfaz de usuario intuitiva con menús, barras de búsqueda y categorías para garantizar una experiencia fluida.</div></div>
+                        <div class="flex items-start"><span class="mr-4 text-2xl text-amber-500">📅</span><div><strong class="block text-gray-800 text-lg">Gestión de Reservas:</strong> Implementar un sistema de citas completo que permita la selección de servicios, visualización de un calendario interactivo y envío de recordatorios.</div></div>
+                        <div class="flex items-start"><span class="mr-4 text-2xl text-amber-500">👤</span><div><strong class="block text-gray-800 text-lg">Experiencia Personalizada:</strong> Ofrecer opciones que permitan a los usuarios ajustar temas, configurar notificaciones y explorar un catálogo detallado de servicios y sedes.</div></div>
+                        <div class="flex items-start"><span class="mr-4 text-2xl text-amber-500">💬</span><div><strong class="block text-gray-800 text-lg">Comunicación Directa:</strong> Facilitar la interacción a través de chat en vivo, soporte por correo electrónico y acceso a redes sociales.</div></div>
                     </div>
                 </div>`;
             
@@ -433,20 +407,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
         initSlideshow() {
             let currentSlide = 0;
-            const slides = document.querySelectorAll('.slide');
+            const slides = document.querySelectorAll('#slideshow .slide');
+            if (slides.length === 0) return;
+            
             const totalSlides = slides.length;
             const prevBtn = document.getElementById('slideshow-prev');
             const nextBtn = document.getElementById('slideshow-next');
             const counter = document.getElementById('slideshow-counter');
 
-            if (!prevBtn) return; // Si no existe la sección, no hacer nada
-
             function updateSlides() {
                 slides.forEach((slide, index) => {
                     slide.classList.remove('active', 'exiting');
-                    if (index === currentSlide) {
-                        slide.classList.add('active');
-                    }
+                    if (index === currentSlide) slide.classList.add('active');
                 });
                 counter.textContent = `Diapositiva ${currentSlide + 1} de ${totalSlides}`;
                 prevBtn.disabled = currentSlide === 0;
@@ -482,20 +454,18 @@ document.addEventListener('DOMContentLoaded', function () {
             ];
             let currentStep = 0;
             const container = document.getElementById('flow-steps-container');
+            if (!container) return;
+
             const prevBtn = document.getElementById('prev-step');
             const nextBtn = document.getElementById('next-step');
             const counter = document.getElementById('step-counter');
 
-            if (!container) return;
-
             function renderSteps() {
-                container.innerHTML = '';
-                flowStepsData.forEach((step, index) => {
-                    const el = document.createElement('div');
-                    el.className = `flow-step p-6 rounded-lg ${index === currentStep ? 'active' : ''}`;
-                    el.innerHTML = `<div class="flex items-center"><span class="text-3xl mr-4">${step.icon}</span><h4 class="font-bold text-xl text-gray-800">${step.title}</h4></div><p class="mt-2 text-lg text-gray-600 pl-12">${step.description}</p>`;
-                    container.appendChild(el);
-                });
+                container.innerHTML = flowStepsData.map((step, index) => `
+                    <div class="flow-step p-6 rounded-lg ${index === currentStep ? 'active' : ''}">
+                        <div class="flex items-center"><span class="text-3xl mr-4">${step.icon}</span><h4 class="font-bold text-xl text-gray-800">${step.title}</h4></div>
+                        <p class="mt-2 text-lg text-gray-600 pl-12">${step.description}</p>
+                    </div>`).join('');
                 counter.textContent = `Paso ${currentStep + 1} de ${flowStepsData.length}`;
                 prevBtn.disabled = currentStep === 0;
                 nextBtn.disabled = currentStep === flowStepsData.length - 1;
@@ -512,9 +482,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 'module-frontend': { title: 'Módulo 2: Plataforma Web para Clientes', description: 'La cara visible del proyecto (Next.js, React, TypeScript), ofrece una experiencia de usuario excepcional.', features: ['Sistema de Reservas Avanzado con calendario.', 'Exploración de servicios y sedes.', 'Dashboard exclusivo para barberos.'] },
                 'module-analytics': { title: 'Módulo 3: Panel de Gestión y Análisis', description: 'Herramienta estratégica (Python con Streamlit) para la administración y análisis del negocio.', features: ['Dashboard Interactivo con KPIs y filtros.', 'Gestión detallada de citas.', 'Asistente de IA para reportes y marketing.'] }
             };
-            const tabs = document.querySelectorAll('.tab');
+            const tabs = document.querySelectorAll('#modules .tab');
             const contentContainer = document.getElementById('tab-content');
-            
             if (!contentContainer) return;
 
             function renderContent(targetId) {
@@ -539,7 +508,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     };
 
-    // --- INICIAR LA APLICACIÓN ---
     app.init();
 });
 </script>
