@@ -1,3 +1,4 @@
+Aquí está el código HTML mejorado:
 <!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
 <head>
@@ -124,12 +125,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 content: `
                     <p class="text-xl text-gray-700 mb-6">Las barberías que dependen de métodos manuales enfrentan barreras significativas para crecer y satisfacer al cliente moderno. Estos problemas incluyen:</p>
                     <ul class="space-y-3 text-lg">
-                        <li class="flex items-start"><span class="mr-3 text-red-500">❌</span><div><strong>Pérdida de Citas:</strong> Dificultad para coordinar agendas y riesgo de errores humanos.</div></li>
-                        <li class="flex items-start"><span class="mr-3 text-red-500">❌</span><div><strong>Comunicación Limitada:</strong> Falta de canales directos para recordatorios.</div></li>
-                        <li class="flex items-start"><span class="mr-3 text-red-500">❌</span><div><strong>Carencia de Datos:</strong> Imposibilidad de analizar tendencias para tomar decisiones informadas.</div></li>
+                        <li class="flex items-start"><span class="mr-3 text-red-500">❌</span><div><strong>Pérdida de Citas:</strong> Dificultad para coordinar agendas y riesgo de errores humanos en la reserva.</div></li>
+                        <li class="flex items-start"><span class="mr-3 text-red-500">❌</span><div><strong>Comunicación Limitada:</strong> Falta de canales directos para recordatorios, promociones y feedback del cliente.</div></li>
+                        <li class="flex items-start"><span class="mr-3 text-red-500">❌</span><div><strong>Carencia de Datos:</strong> Imposibilidad de analizar tendencias, identificar servicios populares o medir el rendimiento para tomar decisiones estratégicas.</div></li>
                     </ul>
                     <p class="text-xl text-gray-800 mt-8 p-4 bg-green-100 border-l-4 border-green-500 rounded-r-lg">
-                        <strong>Nuestra Solución:</strong> Kingdom Barber, una plataforma integral que digitaliza la administración, personaliza la experiencia y potencia el negocio con datos.
+                        <strong>Nuestra Solución:</strong> Kingdom Barber, una plataforma integral que digitaliza la administración, personaliza la experiencia y potencia el negocio con inteligencia de datos.
                     </p>`
             },
             {
@@ -139,65 +140,71 @@ document.addEventListener('DOMContentLoaded', function () {
                 content: `
                     <p class="text-xl text-gray-700 mb-8">El proyecto se basa en una arquitectura moderna y escalable, donde cada sistema tiene una responsabilidad única y se comunica vía API RESTful. Este diseño garantiza mantenibilidad y flexibilidad.</p>
                     <div class="flex flex-col md:flex-row justify-around items-center space-y-6 md:space-y-0 md:space-x-6">
-                        <div class="text-center p-6 bg-blue-50 rounded-lg w-full md:w-1/3"><span class="text-5xl">🌐</span><h4 class="font-bold mt-2 text-lg">Plataforma Web</h4><p class="text-sm text-gray-500">(Next.js)</p><p class="mt-2">Interfaz de usuario interactiva y optimizada.</p></div>
+                        <div class="text-center p-6 bg-blue-50 rounded-lg w-full md:w-1/3 shadow-sm">
+                            <span class="text-5xl">🌐</span><h4 class="font-bold mt-2 text-lg">Plataforma Web (Frontend)</h4><p class="text-sm text-gray-500">(Next.js)</p><p class="mt-2">Interfaz de usuario interactiva y optimizada para la experiencia del cliente y del barbero.</p>
+                        </div>
                         <div class="text-5xl text-amber-500 font-light transform md:-rotate-90">↑↓</div>
-                        <div class="text-center p-6 bg-amber-50 rounded-lg w-full md:w-1/3"><span class="text-5xl">🧠</span><h4 class="font-bold mt-2 text-lg">Backend & API</h4><p class="text-sm text-gray-500">(Spring Boot)</p><p class="mt-2">Núcleo central que procesa la lógica y datos.</p></div>
+                        <div class="text-center p-6 bg-amber-50 rounded-lg w-full md:w-1/3 shadow-sm">
+                            <span class="text-5xl">🧠</span><h4 class="font-bold mt-2 text-lg">Backend & API</h4><p class="text-sm text-gray-500">(Spring Boot)</p><p class="mt-2">Núcleo central que procesa toda la lógica de negocio, seguridad y persistencia de los datos.</p>
+                        </div>
                         <div class="text-5xl text-amber-500 font-light transform md:-rotate-90">↑↓</div>
-                        <div class="text-center p-6 bg-green-50 rounded-lg w-full md:w-1/3"><span class="text-5xl">📊</span><h4 class="font-bold mt-2 text-lg">Panel de Análisis</h4><p class="text-sm text-gray-500">(Python)</p><p class="mt-2">Herramienta para inteligencia de negocio y IA.</p></div>
+                        <div class="text-center p-6 bg-green-50 rounded-lg w-full md:w-1/3 shadow-sm">
+                            <span class="text-5xl">📊</span><h4 class="font-bold mt-2 text-lg">Panel de Análisis (Admin)</h4><p class="text-sm text-gray-500">(Python)</p><p class="mt-2">Herramienta para inteligencia de negocio, visualización de datos y asistente de IA.</p>
+                        </div>
                     </div>
-                    <p class="text-center mt-8 text-gray-600 text-lg">Esta separación permite que los equipos trabajen en paralelo y que el sistema evolucione sin afectar a los otros componentes.</p>`
+                    <p class="text-center mt-8 text-gray-600 text-lg">Esta separación permite que los equipos trabajen en paralelo y que el sistema evolucione sin que los cambios en un componente afecten a los demás.</p>`
             },
             {
                 id: 'slide-3',
                 bgColor: 'bg-slate-50',
-                title: '3. Módulo Backend: El Cerebro del Sistema',
+                title: '3. Módulo Backend: El Cerebro del Sistema (PI_MOVIL2)',
                 content: `
-                    <p class="text-xl text-gray-700 mb-6">Desarrollado con <strong>Spring Boot (Java)</strong>, este módulo es el pilar que soporta toda la operación. Su responsabilidad es crucial:</p>
+                    <p class="text-xl text-gray-700 mb-6">Desarrollado con <strong>Spring Boot (Java)</strong>, este módulo es el pilar que soporta toda la operación. Sus responsabilidades cruciales son:</p>
                     <ul class="space-y-4 text-lg text-gray-700">
-                        <li><strong class="text-amber-700">API RESTful:</strong> Expone endpoints seguros para que el Frontend y el Panel de Análisis consuman y manipulen los datos.</li>
-                        <li><strong class="text-amber-700">Lógica de Negocio:</strong> Centraliza todas las reglas operativas, como la validación de horarios y la gestión de disponibilidad.</li>
-                        <li><strong class="text-amber-700">Persistencia de Datos:</strong> Utiliza <strong>Spring Data JPA y Hibernate</strong> para interactuar con la base de datos de forma eficiente.</li>
+                        <li><strong class="text-amber-700">API RESTful:</strong> Expone un conjunto de endpoints seguros para que el Frontend y el Panel de Análisis consuman y manipulen los datos (clientes, citas, servicios).</li>
+                        <li><strong class="text-amber-700">Lógica de Negocio:</strong> Centraliza todas las reglas operativas, como la validación de horarios, la gestión de disponibilidad de barberos y la lógica de los portales de cliente y barbero.</li>
+                        <li><strong class="text-amber-700">Persistencia de Datos:</strong> Utiliza <strong>Spring Data JPA y Hibernate</strong> para interactuar con la base de datos (H2/SQL) de forma eficiente y segura.</li>
                     </ul>
                     <div class="mt-6 p-4 bg-gray-200 rounded-lg text-gray-800">
-                        <code class="text-sm"><strong>Patrón MVC Adaptado:</strong> Se estructura en Controladores, Modelos y Repositorios, garantizando un código organizado y mantenible.</code>
+                        <code class="text-sm"><strong>Patrón MVC Adaptado:</strong> Se estructura en Controladores (@RestController), Modelos (Entidades JPA) y Repositorios (Interfaces JPA), garantizando un código organizado y mantenible.</code>
                     </div>`
             },
             {
                 id: 'slide-4',
                 bgColor: 'bg-blue-50',
-                title: '4. Módulo Frontend: La Experiencia del Usuario',
+                title: '4. Módulo Frontend: La Experiencia del Usuario (PI_WEB2)',
                 content: `
                     <p class="text-xl text-gray-700 mb-6">Construido con <strong>Next.js (React + TypeScript)</strong>, es la cara visible del proyecto y el punto de contacto directo con clientes y barberos.</p>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-lg">
                         <div>
                             <h4 class="font-semibold text-blue-700 mb-2">Para Clientes:</h4>
                             <ul class="list-disc list-inside space-y-2">
-                                <li>Sistema de reservas con calendario interactivo.</li>
-                                <li>Exploración de servicios, productos y sedes.</li>
-                                <li>Personalización de perfil y notificaciones.</li>
+                                <li>Sistema de reservas avanzado con calendario interactivo.</li>
+                                <li>Exploración de servicios, productos y sedes con mapa.</li>
+                                <li>Autenticación segura para gestionar perfil y citas.</li>
                             </ul>
                         </div>
                         <div>
                             <h4 class="font-semibold text-blue-700 mb-2">Para Barberos:</h4>
                             <ul class="list-disc list-inside space-y-2">
-                                <li>Dashboard para gestionar su agenda personal.</li>
-                                <li>Visualización de citas por día y sede.</li>
-                                <li>Galería para publicar sus trabajos y atraer clientes.</li>
+                                <li>Dashboard para gestionar su agenda personal por sede.</li>
+                                <li>Visualización clara de citas por día, semana o mes.</li>
+                                <li>Galería para publicar sus trabajos y atraer más clientes.</li>
                             </ul>
                         </div>
                     </div>
-                    <p class="mt-8 text-lg p-4 bg-blue-100 rounded-lg">El uso de <strong>TypeScript</strong> asegura un código más robusto, mientras que <strong>Tailwind CSS</strong> permite un diseño moderno y totalmente responsivo.</p>`
+                    <p class="mt-8 text-lg p-4 bg-blue-100 rounded-lg">El uso de <strong>TypeScript</strong> asegura un código más robusto y con menos errores, mientras que <strong>Tailwind CSS</strong> permite un diseño moderno, personalizable y totalmente responsivo.</p>`
             },
             {
                 id: 'slide-5',
                 bgColor: 'bg-green-50',
-                title: '5. Panel de Gestión: Inteligencia de Negocio',
+                title: '5. Panel de Gestión: Inteligencia de Negocio (PI_NTP)',
                 content: `
-                    <p class="text-xl text-gray-700 mb-6">Una potente herramienta estratégica con <strong>Python y Streamlit</strong>, diseñada para que los administradores tomen decisiones basadas en datos.</p>
+                    <p class="text-xl text-gray-700 mb-6">Una potente herramienta estratégica desarrollada con <strong>Python y Streamlit</strong>, diseñada para que los administradores tomen decisiones basadas en datos.</p>
                     <ul class="space-y-4 text-lg">
-                        <li><strong class="text-green-700">Dashboard Interactivo:</strong> Ofrece una vista panorámica del rendimiento con KPIs y filtros para analizar datos en tiempo real.</li>
-                        <li><strong class="text-green-700">Gestión de Citas:</strong> Permite consultar el historial completo de citas con filtros avanzados.</li>
-                        <li><strong class="text-green-700">Asistente de Inteligencia Artificial:</strong> El componente más innovador, con un LLM capaz de generar reportes, responder preguntas sobre los datos y crear textos persuasivos para marketing.</li>
+                        <li><strong class="text-green-700">Dashboard Interactivo:</strong> Ofrece una vista panorámica del rendimiento con KPIs (Ingresos, Citas) y filtros para analizar datos en tiempo real.</li>
+                        <li><strong class="text-green-700">Gestión de Citas:</strong> Permite consultar el historial completo de citas con filtros combinables por sede, barbero, cliente y fecha.</li>
+                        <li><strong class="text-green-700">Asistente de Inteligencia Artificial:</strong> El componente más innovador, con un LLM capaz de generar reportes en PDF, responder preguntas sobre los datos, crear textos para marketing y detectar oportunidades de negocio.</li>
                     </ul>`
             }
         ],
@@ -256,21 +263,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 <div class="bg-white p-8 rounded-2xl shadow-lg space-y-8">
                     <div>
                         <h3 class="text-2xl font-semibold mb-3 text-amber-600">1. Resumen del Proyecto</h3>
-                        <p class="text-lg leading-relaxed text-gray-700">En el competitivo sector del cuidado personal, la experiencia del cliente y la eficiencia operativa son diferenciadores clave. <strong>Kingdom Barber</strong> nace como una <strong>plataforma digital integral</strong>, diseñada para transformar y modernizar la gestión de barberías. Su objetivo es ofrecer una solución robusta que no solo simplifique la administración, sino que también enriquezca la interacción con el cliente y proporcione herramientas avanzadas para la toma de decisiones estratégicas.</p>
+                        <p class="text-lg leading-relaxed text-gray-700">En el competitivo sector del cuidado personal, la experiencia del cliente y la eficiencia operativa son diferenciadores clave. <strong>Kingdom Barber</strong> nace como una <strong>plataforma digital integral</strong>, diseñada para transformar y modernizar la gestión de barberías a través de la tecnología. Su objetivo es ofrecer una solución robusta que no solo simplifique la administración de citas, sino que también enriquezca la interacción con el cliente y proporcione herramientas avanzadas para la toma de decisiones estratégicas.</p>
                     </div>
                     <div class="border-t pt-8">
                         <h3 class="text-2xl font-semibold mb-3 text-amber-600">2. Planteamiento del Problema</h3>
-                        <p class="text-lg leading-relaxed text-gray-700">La gestión tradicional de barberías enfrenta desafíos significativos en la era digital. La dependencia de procesos manuales, la comunicación ineficiente y la falta de análisis de datos resultan en una menor eficiencia operativa. La acelerada adopción digital ha subrayado la necesidad crítica de implementar soluciones que garanticen <strong>seguridad, comodidad y personalización</strong>.</p>
+                        <p class="text-lg leading-relaxed text-gray-700">La gestión tradicional de barberías enfrenta desafíos significativos en la era digital. La dependencia de procesos manuales para la reserva de citas, la comunicación ineficiente y la falta de análisis de datos resultan en una menor eficiencia operativa y una experiencia de cliente que no cumple con las expectativas actuales. La acelerada adopción digital ha subrayado la necesidad crítica de implementar soluciones que garanticen <strong>seguridad, comodidad y personalización</strong>.</p>
                     </div>
                     <div class="border-t pt-8">
-                        <h3 class="text-2xl font-semibold mb-4 text-amber-600">3. Solución y Objetivos Clave</h3>
-                        <p class="mb-6 text-lg text-gray-700">La solución es una plataforma unificada que digitaliza y optimiza las operaciones a través de tres sistemas interconectados. Este enfoque busca cumplir con los siguientes pilares:</p>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-lg">
-                            <div class="flex items-start"><span class="mr-4 text-2xl text-amber-500 mt-1">🛡️</span><div><strong class="block text-gray-800">Seguridad y Acceso:</strong> Garantizar un sistema de autenticación robusto para proteger los datos de usuarios.</div></div>
-                            <div class="flex items-start"><span class="mr-4 text-2xl text-amber-500 mt-1">🧭</span><div><strong class="block text-gray-800">Usabilidad y Navegación:</strong> Crear una interfaz de usuario intuitiva para una experiencia fluida y sin fricciones.</div></div>
-                            <div class="flex items-start"><span class="mr-4 text-2xl text-amber-500 mt-1">📅</span><div><strong class="block text-gray-800">Gestión de Reservas Eficiente:</strong> Implementar un sistema de citas completo con un calendario interactivo y recordatorios automáticos.</div></div>
-                            <div class="flex items-start"><span class="mr-4 text-2xl text-amber-500 mt-1">👤</span><div><strong class="block text-gray-800">Experiencia Personalizada:</strong> Ofrecer opciones para que los usuarios configuren notificaciones y exploren un catálogo detallado.</div></div>
-                        </div>
+                        <h3 class="text-2xl font-semibold mb-4 text-amber-600">3. Solución Propuesta</h3>
+                        <p class="text-lg leading-relaxed text-gray-700">Kingdom Barber aborda estos desafíos mediante una plataforma unificada que digitaliza y optimiza las operaciones a través de tres sistemas interconectados: una <strong>Plataforma Web</strong> para clientes (Next.js), un <strong>Backend robusto</strong> (Spring Boot) y un <strong>Panel de Gestión y Análisis de Datos</strong> (Python/Streamlit). Esta solución empodera a los dueños del negocio con herramientas de análisis de datos e inteligencia artificial para identificar patrones, detectar oportunidades y automatizar tareas de marketing.</p>
                     </div>
                 </div>`;
             
@@ -293,13 +294,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // -- Arquitectura --
             document.getElementById('architecture').innerHTML = `
-                <h2 class="text-4xl font-bold mb-6" style="font-family: var(--font-display);">Diseño de la Arquitectura</h2>
+                <h2 class="text-4xl font-bold mb-6" style="font-family: var(--font-display);">Diseño de la Arquitectura General</h2>
                 <div class="bg-white p-8 rounded-2xl shadow-lg">
-                    <p class="text-lg mb-8 text-gray-700 leading-relaxed">El proyecto está diseñado bajo una <strong>arquitectura de componentes desacoplados</strong>, un enfoque que garantiza escalabilidad, mantenibilidad y flexibilidad. Cada módulo tiene una responsabilidad única y se comunica a través de una <strong>API RESTful</strong>.</p>
+                    <p class="text-lg mb-8 text-gray-700 leading-relaxed">El proyecto está diseñado bajo una <strong>arquitectura de componentes desacoplados</strong>, donde cada módulo tiene una responsabilidad única y se comunica a través de una <strong>API RESTful</strong>. Este enfoque moderno y sinérgico garantiza escalabilidad, mantenibilidad y flexibilidad para futuras expansiones.</p>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-amber-500 hover:shadow-xl transition-shadow"><h3 class="font-bold text-xl mb-2 text-amber-600">Backend (Núcleo)</h3><p class="text-base">Componente central en <strong>Spring Boot (Java)</strong> que aloja la lógica de negocio, gestiona los datos y expone la API REST.</p></div>
-                        <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-blue-400 hover:shadow-xl transition-shadow"><h3 class="font-bold text-xl mb-2 text-blue-600">Frontend (Cliente)</h3><p class="text-base">Capa de presentación en <strong>Next.js (React)</strong> que consume los datos del backend para renderizar una interfaz dinámica.</p></div>
-                        <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-green-400 hover:shadow-xl transition-shadow"><h3 class="font-bold text-xl mb-2 text-green-600">Panel de Administración</h3><p class="text-base">Aplicación independiente en <strong>Python (Streamlit)</strong> para análisis de datos y ejecución de modelos de IA.</p></div>
+                        <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-amber-500 hover:shadow-xl transition-shadow">
+                            <h3 class="font-bold text-xl mb-2 text-amber-600">Backend (Núcleo del Sistema - PI_MOVIL2)</h3>
+                            <p class="text-base">Componente central en <strong>Spring Boot (Java)</strong>. Aloja la lógica de negocio, gestiona la persistencia de datos (usuarios, citas, servicios) y expone la API REST que sirve como cerebro de toda la operación.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-blue-400 hover:shadow-xl transition-shadow">
+                            <h3 class="font-bold text-xl mb-2 text-blue-600">Frontend (Plataforma del Cliente - PI_WEB2)</h3>
+                            <p class="text-base">Capa de presentación desarrollada con <strong>Next.js (React y TypeScript)</strong>. Consume los datos del backend para renderizar una interfaz de usuario dinámica, intuitiva y optimizada para la experiencia del cliente.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-green-400 hover:shadow-xl transition-shadow">
+                            <h3 class="font-bold text-xl mb-2 text-green-600">Panel de Administración (Inteligencia - PI_NTP)</h3>
+                            <p class="text-base">Aplicación web independiente en <strong>Python y Streamlit</strong>. Se conecta a la misma fuente de datos para realizar análisis, generar visualizaciones y ejecutar modelos de IA, sin afectar el rendimiento de la aplicación principal.</p>
+                        </div>
                     </div>
                 </div>`;
             
@@ -307,7 +317,7 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('data-flow').innerHTML = `
                 <h2 class="text-4xl font-bold mb-6" style="font-family: var(--font-display);">Flujo de Datos: Creación de una Cita</h2>
                 <div class="bg-white p-8 rounded-2xl shadow-lg">
-                    <p class="text-lg mb-6 text-gray-700">Este es un ejemplo del flujo de datos cliente-servidor estándar al agendar una cita. Navega paso a paso para ver cómo los componentes interactúan.</p>
+                    <p class="text-lg mb-6 text-gray-700">Este es un ejemplo del flujo de datos cliente-servidor estándar al agendar una cita. Navega paso a paso para ver cómo los componentes interactúan de forma secuencial y lógica.</p>
                     <div class="flex justify-between items-center mb-8">
                         <button id="prev-step" class="bg-stone-800 text-white px-5 py-2 rounded-lg hover:bg-black transition disabled:opacity-50"> &larr; Anterior</button>
                         <span id="step-counter" class="font-semibold text-lg text-gray-700"></span>
@@ -321,9 +331,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 <h2 class="text-4xl font-bold mb-6" style="font-family: var(--font-display);">Análisis Detallado de Módulos</h2>
                 <div class="bg-white p-8 rounded-2xl shadow-lg">
                     <div id="tabs" class="flex border-b border-gray-200 mb-6" role="tablist" aria-label="Módulos">
-                        <button class="tab py-3 px-6 text-gray-500 focus:outline-none text-lg active" data-target="module-backend" role="tab" aria-selected="true">🧠 Backend y API</button>
-                        <button class="tab py-3 px-6 text-gray-500 focus:outline-none text-lg" data-target="module-frontend" role="tab" aria-selected="false">🌐 Plataforma Web</button>
-                        <button class="tab py-3 px-6 text-gray-500 focus:outline-none text-lg" data-target="module-analytics" role="tab" aria-selected="false">📊 Panel de Gestión</button>
+                        <button class="tab py-3 px-6 text-gray-500 focus:outline-none text-lg active" data-target="module-backend" role="tab" aria-selected="true">🧠 Backend y API (PI_MOVIL2)</button>
+                        <button class="tab py-3 px-6 text-gray-500 focus:outline-none text-lg" data-target="module-frontend" role="tab" aria-selected="false">🌐 Plataforma Web (PI_WEB2)</button>
+                        <button class="tab py-3 px-6 text-gray-500 focus:outline-none text-lg" data-target="module-analytics" role="tab" aria-selected="false">📊 Panel de Gestión (PI_NTP)</button>
                     </div>
                     <div id="tab-content" aria-live="polite" class="min-h-[300px]"></div>
                 </div>`;
@@ -332,10 +342,34 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('tech-stack').innerHTML = `
                 <h2 class="text-4xl font-bold mb-6" style="font-family: var(--font-display);">Stack Tecnológico Consolidado</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow"><h3 class="font-bold text-2xl mb-4 border-b-2 pb-2 border-amber-500 text-amber-600">Backend</h3><ul class="space-y-3 text-lg"><li><strong>Java & Spring Boot:</strong> Para una lógica de negocio sólida y segura.</li><li><strong>Spring Data JPA & Hibernate:</strong> Para la gestión de datos eficiente.</li></ul></div>
-                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow"><h3 class="font-bold text-2xl mb-4 border-b-2 pb-2 border-blue-400 text-blue-600">Frontend</h3><ul class="space-y-3 text-lg"><li><strong>Next.js, React & TypeScript:</strong> Para una interfaz rápida, interactiva y robusta.</li><li><strong>Tailwind CSS:</strong> Para un diseño moderno y responsivo.</li></ul></div>
-                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow"><h3 class="font-bold text-2xl mb-4 border-b-2 pb-2 border-green-400 text-green-600">Análisis y IA</h3><ul class="space-y-3 text-lg"><li><strong>Python & Streamlit:</strong> Para crear el panel interactivo de forma ágil.</li><li><strong>Pandas & Plotly:</strong> Para manipulación y visualización de datos.</li></ul></div>
-                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow"><h3 class="font-bold text-2xl mb-4 border-b-2 pb-2 border-gray-500 text-gray-600">Base de Datos</h3><ul class="space-y-3 text-lg"><li><strong>H2 (Desarrollo):</strong> Para agilidad en pruebas y desarrollo.</li><li><strong>SQL (Producción):</strong> Diseño preparado para escalar a PostgreSQL o MySQL.</li></ul></div>
+                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow">
+                        <h3 class="font-bold text-2xl mb-4 border-b-2 pb-2 border-amber-500 text-amber-600">Backend</h3>
+                        <ul class="space-y-3 text-lg">
+                            <li><strong>Java & Spring Boot:</strong> Para una lógica de negocio sólida, segura y escalable.</li>
+                            <li><strong>Spring Data JPA & Hibernate:</strong> Para la capa de persistencia y gestión de datos eficiente.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow">
+                        <h3 class="font-bold text-2xl mb-4 border-b-2 pb-2 border-blue-400 text-blue-600">Frontend</h3>
+                        <ul class="space-y-3 text-lg">
+                            <li><strong>Next.js, React & TypeScript:</strong> Para una interfaz rápida, interactiva y de código robusto.</li>
+                            <li><strong>Tailwind CSS:</strong> Para un diseño moderno, personalizable y totalmente responsivo.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow">
+                        <h3 class="font-bold text-2xl mb-4 border-b-2 pb-2 border-green-400 text-green-600">Análisis y IA</h3>
+                        <ul class="space-y-3 text-lg">
+                            <li><strong>Python & Streamlit:</strong> Para crear el panel interactivo de análisis de forma ágil.</li>
+                            <li><strong>Pandas & Plotly:</strong> Para manipulación, procesamiento y visualización de datos.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow">
+                        <h3 class="font-bold text-2xl mb-4 border-b-2 pb-2 border-gray-500 text-gray-600">Base de Datos</h3>
+                        <ul class="space-y-3 text-lg">
+                            <li><strong>H2 (Desarrollo):</strong> Base de datos en memoria para agilidad en pruebas y desarrollo.</li>
+                            <li><strong>SQL (Producción):</strong> Diseño preparado para escalar a bases de datos como PostgreSQL o MySQL.</li>
+                        </ul>
+                    </div>
                 </div>`;
             
             // -- Objetivos (Detallados) --
@@ -350,9 +384,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
                         <div class="flex items-start"><span class="mr-4 text-2xl text-amber-500">🛡️</span><div><strong class="block text-gray-800 text-lg">Seguridad y Acceso:</strong> Desarrollar un sistema de autenticación y seguridad robusto que incluya inicio de sesión, registro de nuevos usuarios y recuperación de contraseñas.</div></div>
                         <div class="flex items-start"><span class="mr-4 text-2xl text-amber-500">🧭</span><div><strong class="block text-gray-800 text-lg">Usabilidad y Navegación:</strong> Crear una interfaz de usuario intuitiva con menús, barras de búsqueda y categorías para garantizar una experiencia fluida.</div></div>
-                        <div class="flex items-start"><span class="mr-4 text-2xl text-amber-500">📅</span><div><strong class="block text-gray-800 text-lg">Gestión de Reservas:</strong> Implementar un sistema de citas completo que permita la selección de servicios, visualización de un calendario interactivo y envío de recordatorios.</div></div>
-                        <div class="flex items-start"><span class="mr-4 text-2xl text-amber-500">👤</span><div><strong class="block text-gray-800 text-lg">Experiencia Personalizada:</strong> Ofrecer opciones que permitan a los usuarios ajustar temas, configurar notificaciones y explorar un catálogo detallado de servicios y sedes.</div></div>
-                        <div class="flex items-start"><span class="mr-4 text-2xl text-amber-500">💬</span><div><strong class="block text-gray-800 text-lg">Comunicación Directa:</strong> Facilitar la interacción a través de chat en vivo, soporte por correo electrónico y acceso a redes sociales.</div></div>
+                        <div class="flex items-start"><span class="mr-4 text-2xl text-amber-500">📅</span><div><strong class="block text-gray-800 text-lg">Gestión de Reservas:</strong> Implementar un sistema de citas completo que permita la selección de servicios, visualización de un calendario interactivo con horarios y el envío de recordatorios de citas.</div></div>
+                        <div class="flex items-start"><span class="mr-4 text-2xl text-amber-500">👤</span><div><strong class="block text-gray-800 text-lg">Experiencia Personalizada:</strong> Ofrecer opciones que permitan a los usuarios ajustar temas, configurar notificaciones y explorar un catálogo detallado de servicios, productos y sedes.</div></div>
+                        <div class="flex items-start"><span class="mr-4 text-2xl text-amber-500">💬</span><div><strong class="block text-gray-800 text-lg">Comunicación Directa:</strong> Facilitar la interacción a través de chat en vivo, soporte por correo electrónico, acceso a redes sociales y números de contacto.</div></div>
+                        <div class="flex items-start"><span class="mr-4 text-2xl text-amber-500">🛒</span><div><strong class="block text-gray-800 text-lg">Venta y Promoción:</strong> Integrar funcionalidades de comercio electrónico, incluyendo carrito de compras, wishlist, reseñas de productos y gestión de ofertas.</div></div>
                     </div>
                 </div>`;
             
@@ -360,155 +395,196 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('conclusions').innerHTML = `
                 <h2 class="text-4xl font-bold mb-6" style="font-family: var(--font-display);">Conclusiones y Lecciones Aprendidas</h2>
                 <div class="bg-white p-8 rounded-2xl shadow-lg space-y-6 text-lg text-gray-700">
-                    <p>El desarrollo de Kingdom Barber fue un proceso iterativo y colaborativo que culminó en una solución tecnológica funcional y con gran potencial. El enfoque ágil y la comunicación constante fueron clave para superar los desafíos y alcanzar el éxito.</p>
+                    <p>El desarrollo de Kingdom Barber fue un proceso iterativo y colaborativo que culminó en una solución tecnológica funcional y con gran potencial de crecimiento. El enfoque ágil y la comunicación constante fueron clave para superar los desafíos y alinear la visión del equipo.</p>
                     <div class="space-y-4">
-                        <div class="p-4 bg-gray-50 rounded-lg border-l-4 border-amber-400"><strong class="text-gray-800">Evolución del Diseño:</strong> Se partió de un enfoque centrado en la usabilidad, lo que permitió refinar la interfaz progresivamente para asegurar una navegación intuitiva.</div>
-                        <div class="p-4 bg-gray-50 rounded-lg border-l-4 border-amber-400"><strong class="text-gray-800">Importancia de la Comunicación:</strong> Las reuniones diarias y revisiones periódicas fueron cruciales para mantener la alineación del equipo y resolver problemas de manera eficiente.</div>
-                        <div class="p-4 bg-gray-50 rounded-lg border-l-4 border-amber-400"><strong class="text-gray-800">Adaptabilidad y Flexibilidad:</strong> La capacidad para incorporar nuevas propuestas y reestructurar tareas fue esencial para mejorar el producto y cumplir con los objetivos.</div>
+                        <div class="p-4 bg-gray-50 rounded-lg border-l-4 border-amber-400"><strong class="text-gray-800">Evolución del Diseño:</strong> Se partió de un enfoque centrado en la usabilidad, lo que permitió refinar la interfaz progresivamente a medida que avanzaba el desarrollo, asegurando una navegación intuitiva y una experiencia de usuario atractiva.</div>
+                        <div class="p-4 bg-gray-50 rounded-lg border-l-4 border-amber-400"><strong class="text-gray-800">Importancia de la Comunicación:</strong> Las reuniones diarias y las sesiones de revisión periódicas fueron cruciales para mantener la alineación del equipo, resolver problemas de manera eficiente y tomar decisiones informadas en conjunto.</div>
+                        <div class="p-4 bg-gray-50 rounded-lg border-l-4 border-amber-400"><strong class="text-gray-800">Adaptabilidad y Flexibilidad:</strong> La capacidad para incorporar nuevas propuestas y reestructurar tareas sobre la marcha fue esencial para simplificar partes complejas del proyecto y mejorar la calidad del producto final.</div>
+                        <div class="p-4 bg-gray-50 rounded-lg border-l-4 border-amber-400"><strong class="text-gray-800">Lecciones Aprendidas:</strong> Se aprendió a no subestimar la complejidad de ciertas tareas y a ser más realistas en las estimaciones de tiempo. Los momentos de estancamiento se superaron gracias a la perspectiva diversa del equipo.</div>
                     </div>
                     <p class="pt-6 border-t border-gray-200 font-semibold text-gray-800">En resumen, Kingdom Barber no solo representa la entrega de una solución tecnológica funcional, sino que también establece una base sólida para futuras expansiones, asegurando su capacidad de evolucionar y adaptarse a las nuevas tendencias del mercado.</p>
                 </div>`;
             
             // -- Glosario (Ampliado) --
             const glossaryTerms = [
-                { term: 'API RESTful', def: 'Actúa como un "puente" estandarizado que permite que el Frontend, el Backend y el Panel de Análisis se comuniquen e intercambien datos de forma segura y eficiente por internet.' },
-                { term: 'Arquitectura MVC', def: 'Un patrón de diseño que separa una aplicación en tres componentes: Modelo (datos), Vista (interfaz de usuario) y Controlador (lógica). En una API REST, la "Vista" suele ser una respuesta JSON.' },
+                { term: 'API (Application Programming Interface)', def: 'Conjunto de reglas que permite a diferentes aplicaciones comunicarse entre sí. En este proyecto, las API Routes de Next.js y la API REST de Spring Boot actúan como "puentes" para intercambiar datos.' },
+                { term: 'API RESTful', def: 'Un estilo de arquitectura para diseñar APIs que utiliza métodos HTTP estándar (GET, POST, PUT, DELETE). Actúa como el lenguaje común entre el Frontend y el Backend.' },
+                { term: 'Arquitectura MVC', def: 'Un patrón de diseño que separa una aplicación en tres componentes: Modelo (datos y lógica de negocio), Vista (interfaz de usuario) y Controlador (gestiona las peticiones). En la API, la "Vista" es la respuesta JSON.' },
                 { term: 'Backend', def: 'La parte "detrás de escena" del sistema. Es el cerebro donde se procesa la información, se ejecuta la lógica de negocio y se gestiona la conexión con la base de datos (Spring Boot en este proyecto).' },
-                { term: 'Componentes Desacoplados', def: 'Una estrategia de arquitectura donde cada parte del sistema es independiente. Esto facilita el mantenimiento, la escalabilidad y permite que equipos trabajen en paralelo.' },
-                { term: 'CRUD', def: 'Acrónimo de Create, Read, Update y Delete. Son las cuatro operaciones básicas que se pueden realizar sobre los datos en una base de datos. Spring Data JPA las simplifica.' },
-                { term: 'Endpoint', def: 'Una URL específica en la API a la que el Frontend puede enviar una petición para realizar una acción, como obtener una lista de barberos (<code>/api/barberos</code>) o crear una cita (<code>/api/citas</code>).' },
+                { term: 'Componentes Desacoplados', def: 'Una estrategia de arquitectura donde cada parte del sistema es independiente y se comunica a través de interfaces bien definidas (APIs). Esto facilita el mantenimiento y la escalabilidad.' },
+                { term: 'CRUD', def: 'Acrónimo de Create, Read, Update y Delete. Son las cuatro operaciones básicas que se pueden realizar sobre los datos en una base de datos. Spring Data JPA las simplifica enormemente.' },
+                { term: 'Endpoint', def: 'Una URL específica en la API a la que el Frontend puede enviar una petición para realizar una acción, como obtener la lista de barberos (<code>/api/barberos</code>) o crear una cita (<code>/api/citas</code>).' },
+                { term: 'Fetch API', def: 'Interfaz moderna de JavaScript para realizar peticiones de red (HTTP) de forma asíncrona, utilizada por el Frontend para comunicarse con el Backend.' },
                 { term: 'Frontend', def: 'La parte visible e interactiva de la aplicación con la que los usuarios interactúan directamente. Es la "cara" del sistema, construida con Next.js (React).' },
-                { term: 'Hibernate', def: 'Una herramienta de Mapeo Objeto-Relacional (ORM) para Java. Permite trabajar con objetos de Java en lugar de escribir consultas SQL directamente.' },
+                { term: 'Hibernate', def: 'Una herramienta de Mapeo Objeto-Relacional (ORM) para Java. Permite a los desarrolladores trabajar con objetos de Java en lugar de escribir consultas SQL directamente, traduciéndolos automáticamente.' },
                 { term: 'JSON (JavaScript Object Notation)', def: 'Un formato de texto ligero para el intercambio de datos. Es el "idioma" que hablan el Frontend y el Backend para comunicarse a través de la API.' },
-                { term: 'JPA (Java Persistence API)', def: 'Una especificación de Java que describe cómo gestionar datos relacionales en aplicaciones Java. Hibernate es una implementación popular de JPA.' },
-                { term: 'LLM (Large Language Model)', def: 'Un tipo de inteligencia artificial entrenada con enormes cantidades de texto. Es el motor detrás del "Asistente de IA" en el panel de gestión.' },
-                { term: 'Next.js', def: 'Un framework de React que añade funcionalidades clave como el renderizado del lado del servidor (SSR), mejorando el rendimiento y la optimización para motores de búsqueda (SEO).' },
-                { term: 'ORM (Object-Relational Mapping)', def: 'Técnica de programación que convierte datos entre sistemas de tipos incompatibles. Hibernate es el ORM que convierte objetos Java en tablas de base de datos.' },
-                { term: 'Pandas', def: 'Una biblioteca de Python fundamental para el análisis de datos. Proporciona estructuras de datos (como el DataFrame) y herramientas para manipular y analizar datos tabulares.' },
-                { term: 'Reactividad (en Streamlit)', def: 'La capacidad de Streamlit para re-ejecutar el script y actualizar la interfaz automáticamente cada vez que un usuario interactúa con un widget (como un filtro o un botón).' },
-                { term: 'Spring Boot', def: 'Un framework que simplifica radicalmente la creación de aplicaciones Java. Se encarga de gran parte de la configuración, permitiendo a los desarrolladores centrarse en la lógica de negocio.' },
-                { term: 'Streamlit', def: 'Un framework de Python que permite crear aplicaciones web interactivas para ciencia de datos con muy poco código. Es la base del Panel de Gestión.' },
-                { term: 'Tailwind CSS', def: 'Un framework de CSS "utility-first" que proporciona clases de bajo nivel para construir diseños directamente en el HTML, acelerando el desarrollo de interfaces modernas.' },
-                { term: 'TypeScript', def: 'Un superconjunto de JavaScript que añade tipado estático opcional. Ayuda a detectar errores durante el desarrollo y mejora la legibilidad y mantenibilidad del código.' },
-                { term: 'Vanilla JS', def: 'Término que se refiere al uso de JavaScript puro, sin librerías o frameworks adicionales. Se usa para demostrar un conocimiento fundamental del lenguaje.' }
+                { term: 'JPA (Java Persistence API)', def: 'Una especificación de Java que describe cómo gestionar datos relacionales en aplicaciones Java. Hibernate es una implementación popular de esta especificación.' },
+                { term: 'LLM (Large Language Model)', def: 'Un tipo de inteligencia artificial entrenada con enormes cantidades de texto, capaz de comprender y generar lenguaje natural. Es el motor detrás del "Asistente de IA" en el panel de gestión.' },
+                { term: 'Next.js', def: 'Un framework de React que añade funcionalidades clave como el renderizado del lado del servidor (SSR) y la generación de sitios estáticos (SSG), mejorando el rendimiento y el SEO.' },
+                { term: 'ORM (Object-Relational Mapping)', def: 'Técnica de programación que convierte datos entre sistemas de tipos incompatibles. Hibernate es el ORM que convierte objetos Java en tablas de base de datos relacional y viceversa.' },
+                { term: 'Pandas', def: 'Una biblioteca de Python fundamental para el análisis de datos. Proporciona estructuras de datos (como el DataFrame) y herramientas para manipular y analizar datos tabulares de forma eficiente.' },
+                { term: 'Reactividad (en Streamlit)', def: 'La capacidad de Streamlit para re-ejecutar el script y actualizar la interfaz automáticamente cada vez que un usuario interactúa con un widget (como un filtro o un botón), creando una experiencia de dashboard fluida.' },
+                { term: 'Spring Boot', def: 'Un framework que simplifica radicalmente la creación de aplicaciones Java autocontenidas y listas para producción. Se encarga de gran parte de la configuración, permitiendo a los desarrolladores centrarse en la lógica.' },
+                { term: 'Streamlit', def: 'Un framework de Python que permite crear y compartir aplicaciones web interactivas para ciencia de datos y machine learning con muy poco código. Es la base del Panel de Gestión.' },
+                { term: 'Tailwind CSS', def: 'Un framework de CSS "utility-first" que proporciona clases de bajo nivel para construir diseños directamente en el HTML, acelerando el desarrollo de interfaces modernas y consistentes.' },
+                { term: 'TypeScript', def: 'Un superconjunto de JavaScript que añade tipado estático opcional. Ayuda a detectar errores durante el desarrollo y mejora la legibilidad, escalabilidad y mantenibilidad del código del Frontend.' },
+                { term: 'Vanilla JS', def: 'Término que se refiere al uso de JavaScript puro, sin librerías o frameworks adicionales. Se usó en el proyecto PI_MOVIL2 para demostrar un conocimiento fundamental del lenguaje.' }
             ].sort((a, b) => a.term.localeCompare(b.term)); // Ordenar alfabéticamente
             
             const glossaryHTML = glossaryTerms.map(item => `<div class="border-b pb-4"><h3 class="font-bold text-xl text-amber-700">${item.term}</h3><p>${item.def}</p></div>`).join('');
-            
             document.getElementById('glossary').innerHTML = `
                 <h2 class="text-4xl font-bold mb-6" style="font-family: var(--font-display);">Glosario Técnico Extendido</h2>
                 <div class="bg-white p-8 rounded-2xl shadow-lg">
-                    <p class="text-lg mb-8 text-gray-700">Conceptos y tecnologías clave utilizados en el proyecto Kingdom Barber, explicados de forma clara.</p>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">${glossaryHTML}</div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 text-lg">
+                        ${glossaryHTML}
+                    </div>
                 </div>`;
         },
 
-        // --- MÉTODOS PARA COMPONENTES INTERACTIVOS ---
-
         initSlideshow() {
-            let currentSlide = 0;
-            const slides = document.querySelectorAll('#slideshow .slide');
-            if (slides.length === 0) return;
+            const container = document.getElementById('slideshow');
+            if (!container) return;
+
+            let currentIndex = 0;
+            const slides = container.querySelectorAll('.slide');
+            const prevBtn = container.querySelector('#slideshow-prev');
+            const nextBtn = container.querySelector('#slideshow-next');
+            const counter = container.querySelector('#slideshow-counter');
+
+            const updateButtons = () => {
+                prevBtn.disabled = currentIndex === 0;
+                nextBtn.disabled = currentIndex === slides.length - 1;
+            };
+
+            const showSlide = (index) => {
+                const currentSlide = slides[currentIndex];
+                const nextSlide = slides[index];
+
+                if (currentSlide) {
+                    currentSlide.classList.add('exiting');
+                    currentSlide.addEventListener('transitionend', () => {
+                        currentSlide.classList.remove('active', 'exiting');
+                    }, { once: true });
+                }
+                
+                if (nextSlide) {
+                    nextSlide.classList.add('active');
+                }
+
+                currentIndex = index;
+                counter.textContent = `Diapositiva ${currentIndex + 1} de ${slides.length}`;
+                updateButtons();
+            };
+
+            prevBtn.addEventListener('click', () => currentIndex > 0 && showSlide(currentIndex - 1));
+            nextBtn.addEventListener('click', () => currentIndex < slides.length - 1 && showSlide(currentIndex + 1));
             
-            const totalSlides = slides.length;
-            const prevBtn = document.getElementById('slideshow-prev');
-            const nextBtn = document.getElementById('slideshow-next');
-            const counter = document.getElementById('slideshow-counter');
-
-            function updateSlides() {
-                slides.forEach((slide, index) => {
-                    slide.classList.remove('active', 'exiting');
-                    if (index === currentSlide) slide.classList.add('active');
-                });
-                counter.textContent = `Diapositiva ${currentSlide + 1} de ${totalSlides}`;
-                prevBtn.disabled = currentSlide === 0;
-                nextBtn.disabled = currentSlide === totalSlides - 1;
-            }
-
-            nextBtn.addEventListener('click', () => {
-                if (currentSlide < totalSlides - 1) {
-                    slides[currentSlide].classList.add('exiting');
-                    currentSlide++;
-                    updateSlides();
-                }
-            });
-
-            prevBtn.addEventListener('click', () => {
-                if (currentSlide > 0) {
-                    slides[currentSlide].classList.add('exiting');
-                    currentSlide--;
-                    updateSlides();
-                }
-            });
-            updateSlides();
+            updateButtons();
         },
 
         initDataFlow() {
-            const flowStepsData = [
-                { title: '1. Cliente (Frontend)', description: 'El usuario rellena el formulario de reserva en Next.js y hace clic en "Agendar".', icon: '👤' },
-                { title: '2. Petición (HTTP POST)', description: 'El frontend empaqueta los datos en JSON y envía una petición POST a la API del backend (<code>/api/citas</code>).', icon: '📤' },
-                { title: '3. Controlador (Backend)', description: 'El <code>CitaController.java</code> en Spring Boot recibe la petición y la convierte en un objeto Java.', icon: '⚙️' },
-                { title: '4. Lógica y Persistencia', description: 'El controlador invoca al Repositorio, que usa JPA para insertar una nueva fila en la base de datos.', icon: '💾' },
-                { title: '5. Respuesta (HTTP 201)', description: 'El backend devuelve una respuesta JSON con código <code>201 CREATED</code>, confirmando la creación.', icon: '📥' },
-                { title: '6. Actualización de UI', description: 'El frontend recibe la confirmación y actualiza la interfaz para mostrar al usuario que su cita ha sido agendada.', icon: '🖥️' }
-            ];
-            let currentStep = 0;
-            const container = document.getElementById('flow-steps-container');
+            const container = document.getElementById('data-flow');
             if (!container) return;
+            
+            let currentStep = 0;
+            const steps = [
+                { title: '1. Cliente (Frontend)', desc: 'El usuario rellena el formulario de reserva en la interfaz de Next.js (React) y hace clic en "Agendar". Los datos se empaquetan en un objeto JSON.' },
+                { title: '2. Petición HTTP (POST)', desc: 'El frontend envía una petición POST a la API del backend (ej: <code>/api/citas</code>) usando la Fetch API, incluyendo el objeto JSON con los datos de la cita en el cuerpo de la petición.' },
+                { title: '3. Controlador (Backend)', desc: 'El <code>CitaController.java</code> en Spring Boot recibe la petición. El cuerpo JSON se convierte automáticamente en un objeto Java (<code>Cita</code>) gracias a la anotación @PostMapping.' },
+                { title: '4. Lógica y Persistencia', desc: 'El controlador invoca al <code>CitaRepository</code>, que utiliza Spring Data JPA para traducir el objeto Java en una consulta SQL y así insertar una nueva fila en la tabla de citas de la base de datos.' },
+                { title: '5. Respuesta del Backend', desc: 'El backend devuelve una respuesta JSON al frontend con un código de estado <code>201 CREATED</code>, confirmando que la cita se ha agendado con éxito y opcionalmente devolviendo el objeto creado con su nuevo ID.' },
+                { title: '6. Actualización de UI', desc: 'El frontend recibe la confirmación, procesa la respuesta y actualiza la interfaz de usuario para mostrar un mensaje de éxito y reflejar la nueva cita en el calendario.' }
+            ];
 
-            const prevBtn = document.getElementById('prev-step');
-            const nextBtn = document.getElementById('next-step');
-            const counter = document.getElementById('step-counter');
+            const stepsContainer = container.querySelector('#flow-steps-container');
+            const prevBtn = container.querySelector('#prev-step');
+            const nextBtn = container.querySelector('#next-step');
+            const counter = container.querySelector('#step-counter');
 
-            function renderSteps() {
-                container.innerHTML = flowStepsData.map((step, index) => `
-                    <div class="flow-step p-6 rounded-lg ${index === currentStep ? 'active' : ''}">
-                        <div class="flex items-center"><span class="text-3xl mr-4">${step.icon}</span><h4 class="font-bold text-xl text-gray-800">${step.title}</h4></div>
-                        <p class="mt-2 text-lg text-gray-600 pl-12">${step.description}</p>
-                    </div>`).join('');
-                counter.textContent = `Paso ${currentStep + 1} de ${flowStepsData.length}`;
+            steps.forEach((step, index) => {
+                stepsContainer.innerHTML += `
+                    <div class="flow-step p-6 rounded-lg bg-gray-50 border-l-4" data-step="${index}">
+                        <h3 class="font-bold text-xl mb-2">${step.title}</h3>
+                        <p class="text-gray-600 text-lg">${step.desc}</p>
+                    </div>`;
+            });
+
+            const stepElements = stepsContainer.querySelectorAll('.flow-step');
+
+            const updateView = () => {
+                stepElements.forEach((el, index) => {
+                    el.classList.toggle('active', index === currentStep);
+                });
                 prevBtn.disabled = currentStep === 0;
-                nextBtn.disabled = currentStep === flowStepsData.length - 1;
-            }
+                nextBtn.disabled = currentStep === steps.length - 1;
+                counter.textContent = `Paso ${currentStep + 1} de ${steps.length}`;
+            };
+            
+            prevBtn.addEventListener('click', () => { if (currentStep > 0) { currentStep--; updateView(); } });
+            nextBtn.addEventListener('click', () => { if (currentStep < steps.length - 1) { currentStep++; updateView(); } });
 
-            prevBtn.addEventListener('click', () => { if (currentStep > 0) { currentStep--; renderSteps(); } });
-            nextBtn.addEventListener('click', () => { if (currentStep < flowStepsData.length - 1) { currentStep++; renderSteps(); } });
-            renderSteps();
+            updateView();
         },
 
         initModulesTabs() {
-            const tabsData = {
-                'module-backend': { title: 'Módulo 1: Backend y API Central', description: 'El corazón del sistema (Spring Boot y Java), gestiona la lógica, los datos y la seguridad.', features: ['Endpoints RESTful para toda la gestión.', 'Lógica para portales de Cliente y Barbero.', 'Seguridad y persistencia de datos.'] },
-                'module-frontend': { title: 'Módulo 2: Plataforma Web para Clientes', description: 'La cara visible del proyecto (Next.js, React, TypeScript), ofrece una experiencia de usuario excepcional.', features: ['Sistema de Reservas Avanzado con calendario.', 'Exploración de servicios y sedes.', 'Dashboard exclusivo para barberos.'] },
-                'module-analytics': { title: 'Módulo 3: Panel de Gestión y Análisis', description: 'Herramienta estratégica (Python con Streamlit) para la administración y análisis del negocio.', features: ['Dashboard Interactivo con KPIs y filtros.', 'Gestión detallada de citas.', 'Asistente de IA para reportes y marketing.'] }
-            };
-            const tabs = document.querySelectorAll('#modules .tab');
-            const contentContainer = document.getElementById('tab-content');
-            if (!contentContainer) return;
+            const container = document.getElementById('modules');
+            if (!container) return;
 
-            function renderContent(targetId) {
-                const data = tabsData[targetId];
-                const featuresHtml = data.features.map(f => `<li class="flex items-start"><span class="mr-3 text-amber-500 mt-1">✓</span><div>${f}</div></li>`).join('');
-                contentContainer.innerHTML = `
-                    <h3 class="font-bold text-2xl mb-3 text-gray-800">${data.title}</h3>
-                    <p class="text-lg mb-6 text-gray-600">${data.description}</p>
-                    <h4 class="font-semibold text-xl mb-4 text-gray-700">Funcionalidades Principales:</h4>
-                    <ul class="space-y-3 text-lg">${featuresHtml}</ul>`;
-            }
+            const tabs = container.querySelectorAll('.tab');
+            const contentContainer = container.querySelector('#tab-content');
+            
+            const tabContents = {
+                'module-backend': `
+                    <h3 class="font-bold text-2xl mb-4 text-amber-700">Backend y API Central (PI_MOVIL2)</h3>
+                    <p class="text-lg mb-4">Es el corazón del sistema, desarrollado con <strong>Spring Boot y Java</strong>. Gestiona toda la lógica de negocio, los datos y la seguridad a través de una API REST.</p>
+                    <h4 class="font-semibold text-xl mb-2">Funcionalidades Principales:</h4>
+                    <ul class="list-disc list-inside space-y-2 text-lg">
+                        <li><strong>Endpoints RESTful:</strong> Expone un conjunto de endpoints para gestionar clientes, barberos, sedes, servicios y citas.</li>
+                        <li><strong>Portal del Cliente:</strong> Ofrece la lógica para que los usuarios puedan reservar, visualizar, modificar y cancelar sus citas.</li>
+                        <li><strong>Portal del Barbero:</strong> Proporciona un panel donde los barberos pueden iniciar sesión por sede y visualizar su agenda de forma ordenada y clara.</li>
+                    </ul>`,
+                'module-frontend': `
+                    <h3 class="font-bold text-2xl mb-4 text-blue-700">Plataforma Web para Clientes (PI_WEB2)</h3>
+                    <p class="text-lg mb-4">Es la cara visible del proyecto, construida con <strong>Next.js, React y TypeScript</strong> para ofrecer una experiencia de usuario excepcional y un rendimiento optimizado.</p>
+                    <h4 class="font-semibold text-xl mb-2">Funcionalidades Principales:</h4>
+                    <ul class="list-disc list-inside space-y-2 text-lg">
+                        <li><strong>Sistema de Reservas Avanzado:</strong> Incluye un calendario interactivo para seleccionar sede, barbero y servicios de forma intuitiva.</li>
+                        <li><strong>Exploración de Servicios y Sedes:</strong> Ofrece un catálogo detallado de servicios y un mapa interactivo para la geolocalización de las sucursales.</li>
+                        <li><strong>Panel para Barberos:</strong> Un dashboard exclusivo donde los barberos pueden gestionar su agenda y publicar una galería de sus trabajos para atraer clientes.</li>
+                        <li><strong>Autenticación y Comunicación:</strong> Incluye un sistema de registro e inicio de sesión seguro y un formulario de contacto directo.</li>
+                    </ul>`,
+                'module-analytics': `
+                    <h3 class="font-bold text-2xl mb-4 text-green-700">Panel de Gestión y Análisis (PI_NTP)</h3>
+                    <p class="text-lg mb-4">Herramienta estratégica en <strong>Python con Streamlit</strong>, diseñada para el análisis de datos, la visualización de métricas y la administración del negocio.</p>
+                    <h4 class="font-semibold text-xl mb-2">Funcionalidades Principales:</h4>
+                    <ul class="list-disc list-inside space-y-2 text-lg">
+                        <li><strong>Dashboard Interactivo:</strong> Ofrece una vista panorámica del rendimiento con KPIs (Ingresos Totales, Total de Citas) y filtros avanzados en tiempo real.</li>
+                        <li><strong>Gestión de Citas:</strong> Permite la búsqueda y consulta detallada del historial de citas con filtros combinables.</li>
+                        <li><strong>Asistente de IA:</strong> Un centro de análisis avanzado que integra un LLM con capacidades para generar reportes en PDF, analizar datos con lenguaje natural, asistir en marketing y detectar oportunidades de negocio.</li>
+                    </ul>`
+            };
+
+            const updateContent = (targetId) => {
+                contentContainer.innerHTML = tabContents[targetId];
+            };
 
             tabs.forEach(tab => {
                 tab.addEventListener('click', () => {
-                    tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+                    tabs.forEach(t => t.classList.remove('active'));
                     tab.classList.add('active');
-                    tab.setAttribute('aria-selected', 'true');
-                    renderContent(tab.dataset.target);
+                    const targetId = tab.getAttribute('data-target');
+                    updateContent(targetId);
                 });
             });
-            renderContent('module-backend');
+
+            // Init with the first tab
+            updateContent('module-backend');
         }
     };
 
+    // Inicializar la aplicación
     app.init();
+
 });
 </script>
 
