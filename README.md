@@ -1,180 +1,167 @@
 ======================================================================
-                 KINGDOM BARBER - SISTEMA DE GESTIÓN
+              PROYECTO INTEGRADOR: KINGDOM BARBER
 ======================================================================
 
-📖 DESCRIPCIÓN GENERAL
+Integrantes:
+- Alejandro Urrego
+- Andrés Vallejo
+- Juan Manuel Rivera
+
+Institución:
+Institución Técnica CESDE
+
+Fecha:
+2025
+
+======================================================================
+1. INTRODUCCIÓN Y VISIÓN GENERAL
+======================================================================
+
+1.1 Resumen del Proyecto
+------------------------
+El proyecto **Kingdom Barber** nace como una plataforma digital integral, 
+diseñada para transformar y modernizar la gestión de barberías.  
+Su objetivo es ofrecer una solución robusta que simplifique la administración 
+de citas, enriquezca la interacción con el cliente y proporcione herramientas 
+avanzadas para la toma de decisiones.  
+
+El ecosistema se compone de aplicaciones que trabajan de manera sinérgica:
+- **API Central (Node.js + Express):** Cerebro de la operación, gestiona la lógica 
+  de negocio y los datos.
+- **Plataforma Web (Next.js):** Interfaz para clientes y barberos, optimizada 
+  para la reserva de servicios.
+- **Panel de Gestión y Análisis (Python + Streamlit):** Herramienta administrativa 
+  con análisis de datos e Inteligencia Artificial.
+- **Aplicación Independiente (Java + Spring Boot):** Sistema adicional autónomo 
+  que no depende de la API Central.
+
+1.2 Planteamiento del Problema
+------------------------------
+La gestión tradicional de barberías enfrenta limitaciones en la era digital:  
+procesos manuales, comunicación ineficiente y carencia de análisis de datos.  
+Esto disminuye la eficiencia operativa y afecta la experiencia del cliente, 
+que hoy exige comodidad, seguridad y personalización.  
+
+1.3 Solución Propuesta
 ----------------------
+**Kingdom Barber** responde a estos desafíos con una plataforma unificada que 
+digitaliza y optimiza las operaciones.  
 
-Kingdom Barber es una plataforma integral que busca digitalizar y optimizar
-la gestión de barberías.  
-
-El ecosistema está compuesto por tres módulos principales:
-
-- **PI_WEB2 (Frontend Cliente/Barbero)**:  
-  Desarrollado en Next.js (React + Tailwind), ofrece la interfaz para 
-  clientes y barberos.
-
-- **PI_MOVIL2 (Backend / API REST)**:  
-  Construido con Spring Boot en Java, maneja la lógica de negocio, 
-  seguridad y persistencia de datos.
-
-- **PI_NTP (Panel de Gestión / Dashboard con IA)**:  
-  Aplicación desarrollada en Python con Streamlit, diseñada para la 
-  administración avanzada, análisis de métricas y generación de reportes 
-  mediante Inteligencia Artificial.
+Características clave:
+- Gestión de reservas en línea.
+- Catálogo de servicios con opciones personalizadas.
+- Comunicación directa con clientes.
+- Panel administrativo con análisis de datos e IA para reportes y marketing.
 
 ======================================================================
-                   ✨ CARACTERÍSTICAS PRINCIPALES
+2. OBJETIVOS DEL PROYECTO
 ======================================================================
 
------------------------------
--- PORTAL DEL CLIENTE (PI_WEB2) --
------------------------------
+2.1 Objetivo General
+--------------------
+Mejorar la eficiencia operativa de las barberías mediante la digitalización 
+de la gestión de reservas y la comunicación con clientes, ofreciendo una 
+experiencia personalizada que aumente su satisfacción.
 
-- Reservar Cita:
-  Formulario intuitivo para seleccionar sede, barbero, servicio y horario.
-
-- Visualizar Barberos:
-  Listado dinámico con información de barberos disponibles por sede.
-
-- Gestión de Citas:
-  Posibilidad de modificar o cancelar reservas existentes.
-
------------------------------
--- PORTAL DEL BARBERO (PI_WEB2) --
------------------------------
-
-- Inicio de Sesión por Sede:
-  Selección de sede y nombre para acceder a la agenda personal.
-
-- Visualización de Agenda:
-  Listado con citas agendadas (fecha, hora, cliente, servicio).
-
-- Detalles de la Cita:
-  Página dedicada con toda la información del servicio y cliente.
-
-- Cancelación de Citas:
-  Opción para anular citas desde la propia agenda.
-
------------------------------
--- PANEL DE GESTIÓN (PI_NTP) --
------------------------------
-
-- Dashboard General:
-  KPIs de ingresos, citas, servicios y barberos top.
-
-- Filtros Avanzados:
-  Por sede, barbero, cliente y rango de fechas.
-
-- Gráficos Interactivos:
-  Distribución de ingresos, carga de trabajo y evolución de citas.
-
-- Asistente IA:
-  Generador de reportes, analista de datos, marketing inteligente, 
-  detección de oportunidades y asesor de estilo virtual.
+2.2 Objetivos Específicos
+--------------------------
+- **Seguridad y Acceso:** Desarrollar un sistema de autenticación robusto.  
+- **Usabilidad y Navegación:** Crear interfaces intuitivas y responsivas.  
+- **Gestión de Reservas:** Implementar un sistema completo de citas con 
+  calendarios interactivos.  
+- **Experiencia Personalizada:** Ofrecer catálogos y servicios adaptados 
+  al cliente.  
 
 ======================================================================
-               🛠️ TECNOLOGÍAS Y ARQUITECTURA
+3. ARQUITECTURA GENERAL DEL SISTEMA
 ======================================================================
 
+3.1 Diseño de la Arquitectura
 -----------------------------
--- BACKEND (PI_MOVIL2 - SPRING BOOT) --
------------------------------
+El proyecto adopta una **arquitectura de servicios desacoplados**, 
+donde cada módulo cumple una responsabilidad única.  
 
-- Lenguaje: Java
-- Framework: Spring Boot
-- Arquitectura: MVC + API REST
-- Persistencia: Spring Data JPA + SQL
+- **API Central (Node.js + Express):** Única fuente de verdad.  
+- **Frontend Cliente (Next.js + React):** Capa de presentación que consume la API.  
+- **Panel de Gestión (Python + Streamlit):** Se conecta a la API para análisis y reportes.  
+- **Aplicación Independiente (Spring Boot):** Proyecto autónomo que no interactúa 
+  con la API Central.  
 
-**Componentes Clave:**
-- Controladores: Endpoints RESTful para CRUD de citas, barberos, clientes.
-- Modelos: Entidades JPA que representan la base de datos.
-- Repositorios: Interfaces para operaciones CRUD automáticas.
+3.2 Flujo de Datos
+------------------
+Ejemplo: Creación de una cita en la plataforma web.  
 
------------------------------
--- FRONTEND (PI_WEB2 - NEXT.JS) --
------------------------------
-
-- Lenguajes: TypeScript, JavaScript (ES6+), HTML5, CSS3
-- Framework: Next.js + React
-- Estilos: Tailwind CSS
-
-**Características Clave:**
-- Rutas dinámicas y componentes reutilizables.
-- Peticiones a la API con fetch/axios.
-- Diseño responsivo y moderno.
-- Separación de vistas por roles (cliente/barbero).
-
------------------------------
--- PANEL DE GESTIÓN (PI_NTP - STREAMLIT) --
------------------------------
-
-- Lenguaje: Python
-- Framework: Streamlit
-- Librerías: Pandas, Plotly, ReportLab
-- IA: Análisis de datos y generación de reportes automáticos
+1. El cliente llena el formulario en **Next.js**.  
+2. El frontend empaqueta los datos y los envía en formato JSON al endpoint 
+   `/nuevas_citas` de la **API Central**.  
+3. El servidor en **Node.js** valida y guarda la información en 
+   `nuevas_citas.json`.  
+4. La API responde con un **201 Created** y el objeto creado en JSON.  
+5. El frontend actualiza la UI mostrando la cita confirmada.  
 
 ======================================================================
-        ✅ CUMPLIMIENTO DE REQUISITOS DEL PROYECTO
+4. MÓDULOS DEL PROYECTO
 ======================================================================
 
------------------------------
--- FRONTEND --
------------------------------
+4.1 Módulo 1: API Central (Node.js + Express)
+---------------------------------------------
+- **Descripción:** Núcleo del sistema. Gestiona lógica de negocio, 
+  datos en JSON y seguridad.  
+- **Funciones:**  
+  - Endpoints CRUD para clientes, barberos, sedes, servicios, citas y galería.  
+  - Subida de archivos con Multer.  
 
-- Formularios de Ingreso (inputs, submit en HTML):  
-  CUMPLE. Formularios claros para agendar citas y seleccionar sede/barbero.
+4.2 Módulo 2: Plataforma Web (PI_WEB2)
+--------------------------------------
+- **Descripción:** Interfaz visible para clientes y barberos, desarrollada 
+  con Next.js, React y TypeScript.  
+- **Funciones:**  
+  - Reservas conectadas a la API Central.  
+  - Catálogo de servicios y sedes.  
+  - Panel de barberos para gestionar agenda y galería.  
 
-- Captura de Datos con JSON:  
-  CUMPLE. Se envían y reciben datos en formato JSON.
+4.3 Módulo 3: Panel de Gestión (PI_NTP)
+---------------------------------------
+- **Descripción:** Aplicación estratégica en Python con Streamlit.  
+- **Funciones:**  
+  - Dashboard interactivo con KPIs y filtros.  
+  - Gestión de citas históricas.  
+  - Asistente de IA para reportes, análisis y marketing.  
 
-- Peticiones con fetch/axios:  
-  CUMPLE. Implementadas para GET, POST, PUT y DELETE.
+4.4 Módulo 4: Aplicación Independiente (PI_MOVIL2)
+--------------------------------------------------
+- **Descripción:** Proyecto autónomo en Spring Boot (Java) y VanillaJS.  
+- **Nota:** No se integra con la API Central.  
 
-- Presentación Mejorada:  
-  CUMPLE. Interfaz moderna con Tailwind, responsiva y estructurada.
+======================================================================
+5. STACK TECNOLÓGICO CONSOLIDADO
+======================================================================
 
------------------------------
--- BACKEND --
------------------------------
+| Capa                  | Tecnología                  | Propósito                          |
+|-----------------------|-----------------------------|------------------------------------|
+| Backend (API Central) | Node.js, Express.js         | Lógica de negocio, API RESTful      |
+| Frontend (Cliente)    | Next.js, React, TypeScript  | Interfaz de usuario                 |
+| Panel de Análisis     | Python, Streamlit, Pandas   | Gestión administrativa, IA          |
+| Base de Datos (API)   | Archivos JSON               | Almacenamiento de datos             |
+| Backend Independiente | Java, Spring Boot           | Lógica del módulo PI_MOVIL2         |
 
-- Endpoints REST:  
-  CUMPLE. Controladores con operaciones CRUD para citas, barberos y clientes.
+======================================================================
+6. CONCLUSIONES DEL PROYECTO
+======================================================================
 
-- Procesamiento de Datos:  
-  CUMPLE. Incluye lógica de negocio (ej. validación de clientes al crear cita).
+- La adopción de una **API Central en Node.js** como núcleo facilitó 
+  la escalabilidad y flexibilidad.  
+- La arquitectura evolucionó de un modelo monolítico a uno modular, 
+  permitiendo independencia entre equipos de desarrollo.  
+- La definición de contratos claros en la API permitió trabajo en paralelo 
+  entre frontend y backend.  
+- Aprendimos la importancia de planificar tiempo suficiente para integración 
+  y mantener documentación actualizada.  
 
-- Conexión a BD:  
-  CUMPLE. Persistencia con JPA y base SQL.
+En conjunto, **Kingdom Barber** entrega una solución moderna, modular y 
+funcional, que sienta bases sólidas para futuras expansiones.  
 
-- Respuestas en JSON:  
-  CUMPLE. Respuestas automáticas procesadas por Spring Boot.
-
------------------------------
--- PANEL DE GESTIÓN --
------------------------------
-
-- Dashboard Interactivo:  
-  CUMPLE. Visualización de KPIs con gráficos dinámicos.
-
-- Filtros Avanzados:  
-  CUMPLE. Aplicados en tiempo real sobre datos históricos.
-
-- Reportes en PDF:  
-  CUMPLE. Generación automática con análisis interpretativo.
-
-- IA Integrada:  
-  CUMPLE. Asistente con submódulos especializados para análisis y marketing.
-
------------------------------
--- REQUISITOS ADICIONALES --
------------------------------
-
-- Roles Diferenciados:  
-  CUMPLE. Cliente y Barbero con accesos y vistas específicas.
-
-- Experiencia de Usuario:  
-  CUMPLE. Flujo intuitivo y diseño atractivo.
+======================================================================
 
 - Escalabilidad:  
   CUMPLE. Arquitectura modular que permite crecimiento del sistema.
