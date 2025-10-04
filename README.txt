@@ -85,14 +85,14 @@ Puerto 3000           Puerto 8501
 Para usar el sistema completo, **ejecuta los tres proyectos** en el siguiente orden:
 
 #### 1️⃣ Iniciar la API Central (Java)
-```bash
+```
 cd pi_movil2
 ./mvnw spring-boot:run
 ```
 API disponible en 👉 `http://localhost:8080`
 
 #### 2️⃣ Iniciar el Panel de Gestión (Python)
-```bash
+```
 cd pi_ntp
 .venv\Scripts\activate
 streamlit run inicio.py
@@ -100,7 +100,7 @@ streamlit run inicio.py
 Panel disponible en 👉 `http://localhost:8501`
 
 #### 3️⃣ Iniciar la Plataforma Web (Next.js)
-```bash
+```
 cd pi_web2
 npm run dev
 ```
@@ -210,3 +210,4 @@ El proyecto **Kingdom Barber** consolida un ecosistema tecnológico moderno, coh
 ======================================================================
                      ✨ FIN DEL DOCUMENTO
 ======================================================================
+
