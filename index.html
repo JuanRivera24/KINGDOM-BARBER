@@ -159,11 +159,25 @@
                 transform: translateY(-3px) rotate(5deg);
             }
         }
+        
+        /* Estilos para el nuevo diagrama de arquitectura */
+        .arch-diagram-line {
+            position: absolute;
+            height: 2px;
+            background: repeating-linear-gradient(90deg, #a0aec0, #a0aec0 4px, transparent 4px, transparent 8px);
+            animation: march 2s linear infinite;
+        }
+
+        @keyframes march {
+            from { background-position-x: 0; }
+            to { background-position-x: -16px; }
+        }
     </style>
 </head>
 
 <body class="flex h-screen overflow-hidden">
 
+    <!-- Sidebar / Header -->
     <header class="w-72 bg-sidebar-bg text-sidebar-text flex flex-col p-6 shadow-2xl flex-shrink-0">
         <div class="text-center mb-12">
             <h1 class="text-3xl font-bold text-amber-400" style="font-family: var(--font-display);">
@@ -172,12 +186,24 @@
             <p class="text-sm text-gray-400 mt-1">Visor Interactivo del Proyecto</p>
         </div>
         <nav id="main-nav" class="flex flex-col space-y-2" aria-label="Navegación principal"></nav>
+        
+        <!-- Links de Despliegue en Sidebar -->
+        <div class="mt-8 pt-4 border-t border-gray-700">
+            <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">Enlaces de Despliegue</h3>
+            <div class="flex flex-col space-y-2 text-sm">
+                <a href="https://pi-web2-six.vercel.app/" target="_blank" class="text-gray-300 hover:text-white transition-colors duration-200">🌐 Plataforma Web</a>
+                <a href="https://kingdombarberdashboard.streamlit.app/" target="_blank" class="text-gray-300 hover:text-white transition-colors duration-200">📊 Panel de Gestión</a>
+                <a href="https://pi-movil2-0.onrender.com/sedes" target="_blank" class="text-gray-300 hover:text-white transition-colors duration-200">🧠 API Central (Test)</a>
+            </div>
+        </div>
+
         <div class="mt-auto text-center text-xs text-gray-500">
             <p class="font-semibold">Alejandro Urrego • Andrés Vallejo • Juan M. Rivera</p>
             <p class="mt-1">Institución Técnica CESDE &copy; 2025</p>
         </div>
     </header>
 
+    <!-- Contenido Principal -->
     <main id="main-content" class="flex-1 overflow-y-auto p-8 md:p-12"></main>
 
     <script>
@@ -189,16 +215,19 @@
                     mainContent: document.getElementById('main-content'),
                 },
 
+                // Data de las secciones para la navegación y el contenido
                 sectionsData: [
                     { id: 'overview', title: 'Visión General', icon: '🏠', active: true },
                     { id: 'objectives', title: 'Objetivos', icon: '🎯' },
                     { id: 'slideshow', title: 'Presentación Detallada', icon: '📺' },
                     { id: 'architecture', title: 'Arquitectura y Tecnologías', icon: '💻' },
                     { id: 'data-flow', title: 'Flujo de Datos', icon: '↔️' },
+                    { id: 'deployment', title: 'Despliegue y Acceso', icon: '🚀' },
                     { id: 'conclusions', title: 'Conclusiones', icon: '📜' },
                     { id: 'glossary', title: 'Glosario Técnico', icon: '📖' }
                 ],
-
+                
+                // Data para el carrusel de diapositivas
                 slidesData: [
                     {
                         id: 'slide-1',
@@ -237,76 +266,163 @@
                     this.attachNavListeners();
                     this.initInteractiveComponents();
                 },
-
+                
                 getSectionHTML(sectionId) {
                     const slidesHTML = this.slidesData.map((slide, index) => `
-                <div id="${slide.id}" class="slide p-8 md:p-12 ${slide.bgColor} rounded-xl ${index === 0 ? 'active' : ''}">
-                    <h3 class="text-3xl font-bold mb-4 text-stone-800">${slide.title}</h3>
-                    ${slide.content}
-                </div>`).join('');
-
+                        <div id="${slide.id}" class="slide p-8 md:p-12 ${slide.bgColor} rounded-xl ${index === 0 ? 'active' : ''}">
+                            <h3 class="text-3xl font-bold mb-4 text-stone-800">${slide.title}</h3>
+                            ${slide.content}
+                        </div>`).join('');
+                    
                     const glossaryTerms = [
-                        { term: 'API RESTful', def: 'Un **estilo de arquitectura** que define el conjunto de *endpoints* utilizando métodos HTTP estándar (GET, POST, PUT, DELETE) para realizar operaciones CRUD sobre los recursos.' },
-                        { term: 'Arquitectura de Enrutamiento', def: 'El sistema encargado de mapear las URLs entrantes a la función o componente de código correspondiente, vital en la plataforma web (Next.js) para la navegación y el renderizado.' },
-                        { term: 'Arquitectura de Servicios Desacoplados', def: 'Principio de diseño clave que separa el Back-End (API) de todos los Front-Ends (Web, Dashboard). Permite que cada cliente evolucione de forma independiente.' },
-                        { term: 'Asistente de Inteligencia Artificial', def: 'Módulo de análisis avanzado que utiliza un **Modelo de Lenguaje Grande (LLM)** para generar análisis de datos, responder preguntas en lenguaje natural y crear estrategias de negocio.' },
-                        { term: 'Autenticación de Usuarios', def: 'El proceso de verificar la identidad de un usuario (login/registro). En el proyecto, esta funcionalidad fue externalizada a un servicio de terceros para mayor seguridad y simplicidad.' },
-                        { term: 'Base64', def: 'Un método de codificación que convierte datos binarios (como imágenes) en texto ASCII. Se adoptó en la API para **almacenar contenido directamente en la base de datos**, resolviendo problemas de rutas y CORS.' },
-                        { term: 'Business Intelligence (BI)', def: 'Conjunto de estrategias y herramientas implementadas en el Panel de Gestión para la **toma de decisiones estratégicas**, a través de la visualización de KPIs y el análisis de datos históricos.' },
-                        { term: 'Capa de Abstracción de Datos', def: 'Un componente (ej. un módulo en Python) que oculta la complejidad de la comunicación con la API (peticiones HTTP) y traduce el formato de datos (`JSON` a `DataFrame`) antes de su uso.' },
-                        { term: 'Capa de Persistencia', def: 'El módulo o conjunto de clases (repositorios/JPA) dentro del *back-end* responsable de gestionar el almacenamiento y la recuperación de datos desde la base de datos (H2).' },
-                        { term: 'Capa de Traducción de Datos', def: 'El mecanismo implementado en el Front-End de análisis para mapear la nomenclatura de campos de Java (`camelCase`) a la esperada por Python (`Pascal_Case`), garantizando la compatibilidad entre *stacks*.' },
-                        { term: 'Clase Controladora (Controller)', def: 'Una clase fundamental en la arquitectura Spring Boot encargada de recibir las peticiones HTTP (entradas), invocar la lógica de negocio necesaria, y devolver una respuesta HTTP (salida).' },
-                        { term: 'Clase Modelo (Model/Entity)', def: 'Una clase Java que representa la **estructura de los datos** del negocio (ej. una cita, un barbero) tal como se almacenan en la base de datos o se transfieren vía JSON.' },
-                        { term: 'Clerk', def: 'Un servicio de terceros de **gestión de identidad** que maneja los flujos de autenticación (login, registro) para la plataforma web.' },
-                        { term: 'Contrato de API', def: 'La especificación estable y documentada de los *endpoints* y la estructura de datos JSON esperada. Es el **acuerdo funcional** que deben respetar todos los servicios para la comunicación.' },
-                        { term: 'CORS (Cross-Origin Resource Sharing)', def: 'Un mecanismo de seguridad necesario para permitir que la API de Java acepte peticiones de diferentes dominios (orígenes), esencial para la integración entre los *front-ends* y el *back-end*.' },
-                        { term: 'CRUD', def: 'Acrónimo de **Create, Read, Update y Delete**. Son las cuatro operaciones básicas que definen la funcionalidad de la API sobre las entidades de datos.' },
-                        { term: 'DataFrame', def: 'Estructura de datos tabular fundamental de la librería **Pandas**. Es el formato de trabajo en el Panel de Gestión para el procesamiento y análisis de los datos históricos.' },
-                        { term: 'Dependencia de Componentes', def: 'La relación clave en el proyecto donde los **Front-Ends son totalmente dependientes** de los servicios y el contrato definido por la API Central de Java.' },
-                        { term: 'Endpoint', def: 'Una URL específica en la API (ej. `/galeria`, `/citas-activas`) a la que una aplicación cliente envía una petición HTTP para interactuar con la lógica del negocio.' },
-                        { term: 'Entidad de Base de Datos (Entity)', def: 'Una clase del modelo de datos (`@Entity` en JPA) que está mapeada directamente a una tabla en la base de datos (H2) y representa un registro persistido.' },
-                        { term: 'Fetch API', def: 'La interfaz de programación **nativa de JavaScript** utilizada por el Front-End web para realizar las peticiones asíncronas HTTP al *back-end*.' },
-                        { term: 'Front-End (Cliente)', def: 'La parte visible e interactiva de la aplicación. En el proyecto son dos: la plataforma web (Next.js) para clientes y el panel de gestión (Streamlit) para administradores.' },
-                        { term: 'Gemini', def: 'El **Modelo de Lenguaje Grande (LLM)** de Google Generative AI integrado en el Panel de Gestión, proveyendo la base tecnológica para el Asistente de IA.' },
-                        { term: 'H2 Database', def: 'Una base de datos relacional ligera escrita en Java. Se utilizó como **base de datos en memoria** para el desarrollo y las pruebas de la API, simplificando la configuración.' },
-                        { term: 'Hibernate', def: 'Un framework de **mapeo objeto-relacional (ORM)** para Java. Es la herramienta subyacente que utiliza Spring Data JPA para traducir las operaciones de código Java a sentencias SQL.' },
-                        { term: 'Integridad de la Información', def: 'Un objetivo clave logrado al centralizar la lógica de negocio en la API, asegurando que todos los clientes reciban información consistente y válida, evitando redundancias.' },
-                        { term: 'JSON (JavaScript Object Notation)', def: 'El formato de texto estándar para el intercambio de datos entre la API de Java y los clientes (Front-Ends).' },
-                        { term: 'JpaRepository', def: 'La interfaz de Spring Data JPA extendida por las clases en la capa de persistencia. Proporciona automáticamente los métodos esenciales para el CRUD sin necesidad de escribir SQL.' },
-                        { term: 'Lombok', def: 'Una librería de Java que automatiza la escritura de **código repetitivo** (*getters*, *setters*, constructores) en las clases modelo, mejorando la legibilidad.' },
-                        { term: 'Lógica de Negocio', def: 'El conjunto de reglas y flujos de trabajo que definen cómo se procesan, almacenan y manipulan los datos. En este proyecto, está **centralizada completamente en la API Central**.' },
-                        { term: 'Maven', def: 'Una herramienta de automatización de construcción y **gestión de dependencias** para proyectos Java. Se utilizó para gestionar las librerías necesarias del *back-end*.' },
-                        { term: 'middleware (Next.js)', def: 'Un mecanismo de código en el *front-end* web que se ejecuta antes de que se cargue una ruta. Se usó para gestionar las **rutas protegidas**, validando la autenticación del usuario.' },
-                        { term: 'Modelo de Datos (Data Model)', def: 'La representación abstracta y estructurada de las entidades del negocio (citas, barberos, servicios) y sus relaciones, clave para la base de datos y la API.' },
-                        { term: 'Next.js', def: 'Un framework de **React** que añade funcionalidades clave como el enrutamiento y el renderizado del lado del servidor (SSR), optimizando el rendimiento de la plataforma web.' },
-                        { term: 'Pandas', def: 'Una biblioteca de **Python** fundamental para el análisis de datos. Se usa en el Panel de Gestión para manipular y procesar los DataFrames de datos históricos.' },
-                        { term: 'Patrón de Repositorio (Repository Pattern)', def: 'Un patrón de diseño implementado con Spring Data JPA que aísla la lógica de acceso a datos de la lógica de negocio, haciendo el código más modular y testeable.' },
-                        { term: 'Persistencia de Datos', def: 'El mecanismo para almacenar de forma duradera la información del negocio, implementado mediante **Spring Data JPA e Hibernate** sobre la base de datos H2.' },
-                        { term: 'Plotly Express', def: 'Librería de **Python** para la visualización de datos. Se utiliza en el Panel de Gestión para renderizar los **gráficos interactivos** y las métricas en la interfaz de Streamlit.' },
-                        { term: 'Spring Boot', def: 'El framework principal de **Java** que simplifica la creación de aplicaciones robustas. Proporciona un servidor Tomcat embebido y facilita la configuración de la aplicación RESTful.' },
-                        { term: 'Spring Data JPA', def: 'Un proyecto de Spring que simplifica la capa de **acceso a datos**. Permite crear repositorios que heredan métodos CRUD para interactuar con la base de datos.' },
-                        { term: 'Streamlit', def: 'Un framework de **Python** que permite crear aplicaciones web interactivas para ciencia de datos con poco código. Es la base tecnológica del Panel de Gestión y Análisis.' },
-                        { term: 'Tailwind CSS', def: 'Un framework de CSS "**utility-first**" que proporciona clases de bajo nivel para construir diseños directamente en el HTML, acelerando el desarrollo de la interfaz de la plataforma web.' },
-                        { term: 'TypeScript', def: 'Un **superconjunto de JavaScript** que añade tipado estático. Se usó en el *front-end* de Next.js para mejorar la escalabilidad y la detección de errores en el código.' },
-                        { term: 'Única Fuente de Verdad (USV)', def: 'El principio arquitectónico por el cual la **API Central es la única entidad** autorizada para manipular y persistir los datos, asegurando la consistencia en todo el ecosistema.' },
-                        { term: 'WebConfig', def: 'Clase de configuración en la API de Java responsable de definir la configuración de **CORS** y otras configuraciones generales necesarias para el comportamiento web del *back-end*.' }
+                        { term: 'API RESTful', def: 'Un **estilo de arquitectura** de software para sistemas distribuidos, como la World Wide Web. Define un conjunto de restricciones para la creación de servicios web que se comunican a través de HTTP, usando métodos estándar (GET, POST, PUT, DELETE) para realizar operaciones CRUD sobre los recursos.' },
+                        { term: 'App Router (Next.js)', def: 'La arquitectura de enrutamiento más reciente de Next.js, basada en directorios dentro de la carpeta `/app`. Promueve la organización por funcionalidad y habilita características avanzadas como los Componentes de Servidor y Layouts anidados.' },
+                        { term: 'Arquitectura de Servicios Desacoplados', def: 'Un principio de diseño de software que estructura una aplicación como una colección de servicios poco acoplados. En este proyecto, separa el Back-End (API) de los Front-Ends, permitiendo que cada componente se desarrolle, despliegue y escale de forma independiente.' },
+                        { term: 'Asistente de Inteligencia Artificial', def: 'Módulo de análisis avanzado que utiliza un **Modelo de Lenguaje Grande (LLM)**, como Gemini, para procesar y comprender el lenguaje natural. Permite generar análisis de datos, responder preguntas complejas y crear contenido de forma automatizada.' },
+                        { term: 'Autenticación de Usuarios', def: 'El proceso de verificar la identidad de un usuario para concederle acceso a recursos protegidos. En el proyecto, esta funcionalidad se delega a un servicio externo (Clerk) para mayor seguridad y para simplificar la gestión de sesiones y perfiles.' },
+                        { term: 'Back-End', def: 'La parte de una aplicación que se ejecuta en el servidor y es invisible para el usuario final. En este proyecto, corresponde a la **API Central (Java/Spring Boot)**, que maneja toda la lógica de negocio, el procesamiento de datos y la comunicación con la base de datos.' },
+                        { term: 'Base64', def: 'Un método de codificación que convierte datos binarios (como imágenes) en una cadena de texto ASCII. Se adoptó en la API para **almacenar contenido de imágenes directamente en la base de datos**, eliminando la complejidad de gestionar un sistema de archivos y los problemas de CORS para recursos estáticos.' },
+                        { term: 'Business Intelligence (BI)', def: 'El conjunto de estrategias, tecnologías y herramientas para el análisis de datos de negocio. El **Panel de Gestión** es la herramienta de BI del proyecto, permitiendo la visualización de KPIs, el análisis de datos históricos y la toma de decisiones informadas.' },
+                        { term: 'CI/CD (Integración/Despliegue Continuo)', def: 'Una práctica de DevOps que automatiza el proceso de construcción, prueba y despliegue de código. Las plataformas **Vercel, Render y Streamlit Cloud** implementan CI/CD para desplegar automáticamente las nuevas versiones del software al actualizar el repositorio.' },
+                        { term: 'Capa de Abstracción de Datos', def: 'Un componente de software que oculta los detalles técnicos de la comunicación con una fuente de datos. El módulo `data_manager.py` actúa como una capa de abstracción, simplificando las peticiones a la API y la conversión de JSON a DataFrames de Pandas.' },
+                        { term: 'Capa de Persistencia', def: 'El conjunto de componentes de software (ej. Repositorios de Spring Data JPA) cuya responsabilidad es gestionar el almacenamiento y la recuperación de datos de forma duradera en una base de datos.' },
+                        { term: 'Clase Controladora (Controller)', def: 'En Spring Boot, una clase anotada con `@RestController` que maneja las peticiones HTTP entrantes. Mapea los endpoints (URLs) a métodos específicos que ejecutan la lógica de negocio y devuelven una respuesta.' },
+                        { term: 'Clase Modelo (Model/Entity)', def: 'Una clase Java (`@Entity`) que representa la estructura de los datos del negocio (ej. una cita, un barbero). JPA la utiliza para mapear objetos a tablas en la base de datos relacional.' },
+                        { term: 'Clerk', def: 'Un servicio de terceros para la **gestión de identidad y autenticación de usuarios**. Simplifica la implementación de login, registro, gestión de perfiles y protección de rutas en aplicaciones web modernas como las de Next.js.' },
+                        { term: 'Contenerización (Docker)', def: 'La práctica de empaquetar una aplicación y todas sus dependencias en una unidad estandarizada para el desarrollo de software, llamada contenedor. **Docker** es la herramienta utilizada para contenerizar la API de Java, asegurando que se ejecute de manera consistente en cualquier entorno.' },
+                        { term: 'Contrato de API', def: 'La especificación formal y documentada de cómo los clientes deben comunicarse con una API. Define los endpoints, métodos HTTP, parámetros y la estructura de los datos (JSON) esperados. Es el **acuerdo funcional** entre el back-end y los front-ends.' },
+                        { term: 'CORS (Cross-Origin Resource Sharing)', def: 'Un mecanismo de seguridad del navegador que restringe las peticiones HTTP realizadas desde un dominio a otro. Es crucial configurar CORS en el back-end para permitir que los front-ends (desplegados en Vercel y Streamlit Cloud) puedan comunicarse con la API (desplegada en Render).' },
+                        { term: 'CRUD', def: 'Acrónimo de **Create, Read, Update y Delete** (Crear, Leer, Actualizar, Borrar). Son las cuatro operaciones básicas que se pueden realizar sobre los datos en una base de datos o a través de una API.' },
+                        { term: 'Data Transfer Object (DTO)', def: 'Un patrón de diseño para transferir datos entre las capas de una aplicación. En la API de Java, se usa para desacoplar el modelo de la base de datos (Entidad) del modelo expuesto en la API, permitiendo personalizar la información que se envía o recibe.' },
+                        { term: 'DataFrame', def: 'La estructura de datos principal de la librería **Pandas** en Python. Es una tabla bidimensional, similar a una hoja de cálculo, que es fundamental para la manipulación y el análisis de datos en el Panel de Gestión.' },
+                        { term: 'Endpoint', def: 'Una URL específica en una API a la que una aplicación cliente puede enviar una petición para interactuar con un recurso o ejecutar una operación. Por ejemplo, `/citas-activas` es un endpoint para gestionar citas.' },
+                        { term: 'ESLint', def: 'Una herramienta de análisis estático de código para identificar y reportar patrones problemáticos en código JavaScript/TypeScript. Se utiliza en el proceso de build de Vercel para asegurar la calidad y consistencia del código del front-end.' },
+                        { term: 'Fetch API', def: 'Una interfaz moderna y nativa de los navegadores web para realizar peticiones HTTP de forma asíncrona. Es la herramienta estándar utilizada en la aplicación de Next.js para comunicarse con el back-end.' },
+                        { term: 'FPDF2', def: 'Una librería de Python que permite la creación y manipulación de archivos PDF de forma programática. Se utiliza en el Panel de Gestión para la funcionalidad de "Generador de Reportes" del Asistente de IA.' },
+                        { term: 'Front-End (Cliente)', def: 'La parte de la aplicación con la que el usuario interactúa directamente. En este proyecto, hay dos front-ends: la **plataforma web (Next.js)** para clientes y el **panel de gestión (Streamlit)** para administradores.' },
+                        { term: 'Gemini', def: 'El **Modelo de Lenguaje Grande (LLM)** de Google, que potencia las capacidades del Asistente de IA en el Panel de Gestión para el análisis de datos, la generación de texto y la comprensión del lenguaje natural.' },
+                        { term: 'H2 Database', def: 'Una base de datos relacional ligera, escrita en Java, que puede funcionar en memoria. Se utilizó como **base de datos para el entorno de desarrollo** de la API, facilitando una configuración rápida y sin dependencias externas.' },
+                        { term: 'Headless UI', def: 'Una librería de componentes de interfaz de usuario para React que proporciona la lógica y la accesibilidad de componentes complejos (como modales o menús desplegables) sin imponer ningún estilo visual, ofreciendo máxima flexibilidad en el diseño.' },
+                        { term: 'Hibernate', def: 'Un framework de **mapeo objeto-relacional (ORM)** para Java. Es la implementación subyacente que utiliza Spring Data JPA para convertir las operaciones sobre objetos Java en sentencias SQL ejecutables por la base de datos.' },
+                        { term: 'JSON (JavaScript Object Notation)', def: 'Un formato de texto ligero para el intercambio de datos. Es el estándar de facto para la comunicación entre servidores y clientes web, utilizado por la API de Java para enviar y recibir información.' },
+                        { term: 'JpaRepository', def: 'Una interfaz de Spring Data JPA que, al ser extendida, proporciona automáticamente un conjunto completo de métodos CRUD para una entidad específica, reduciendo drásticamente la cantidad de código repetitivo necesario para el acceso a datos.' },
+                        { term: 'Lombok', def: 'Una librería de Java que se conecta al proceso de compilación para generar automáticamente código repetitivo como *getters*, *setters*, constructores y más, a través de anotaciones. Esto mantiene las clases modelo limpias y legibles.' },
+                        { term: 'Lucide-react', def: 'Una librería de iconos SVG de código abierto, ligeros y personalizables, empaquetados como componentes de React. Se utiliza en la plataforma web para proporcionar una iconografía clara y consistente.' },
+                        { term: 'Maven', def: 'Una herramienta de automatización de construcción y **gestión de dependencias** para proyectos Java. Se utiliza para definir las librerías necesarias (como Spring Boot, JPA, etc.) y compilar el proyecto en un archivo ejecutable.' },
+                        { term: 'middleware (Next.js)', def: 'Un fragmento de código que se ejecuta antes de que una petición sea completada en el servidor. En Next.js, se utiliza para interceptar peticiones a rutas específicas, ideal para implementar lógica de autenticación y proteger rutas.' },
+                        { term: 'Next.js', def: 'Un framework de **React** para construir aplicaciones web de producción. Añade funcionalidades clave sobre React, como el enrutamiento basado en archivos (App Router), renderizado en el servidor (SSR) y optimización de rendimiento.' },
+                        { term: 'Pandas', def: 'Una biblioteca de **Python** esencial para la ciencia de datos. Proporciona estructuras de datos de alto rendimiento, como el DataFrame, y herramientas para el análisis, limpieza y manipulación de datos.' },
+                        { term: 'PostgreSQL', def: 'Un potente sistema de base de datos relacional de código abierto, conocido por su robustez, escalabilidad y cumplimiento de los estándares SQL. Es la **base de datos utilizada en el entorno de producción** para la API desplegada en Render.' },
+                        { term: 'Render', def: 'Una plataforma en la nube (PaaS) que simplifica el despliegue y alojamiento de aplicaciones web, APIs y bases de datos. Se utiliza para **desplegar la API Central de Java** a través de su contenedor Docker.' },
+                        { term: 'Requests (Librería Python)', def: 'La librería estándar de facto en Python para realizar peticiones HTTP. Es utilizada en el Panel de Gestión para comunicarse con la API de Java y obtener los datos necesarios para los análisis.' },
+                        { term: 'Secrets Management', def: 'La práctica de gestionar de forma segura información sensible como claves de API y credenciales de bases de datos. Se implementa a través de **variables de entorno** en las plataformas de despliegue (Render, Vercel) y el archivo `secrets.toml` en Streamlit.' },
+                        { term: 'Spring Boot', def: 'Un framework del ecosistema de Spring que simplifica radicalmente la creación de aplicaciones Java autónomas y de grado de producción. Proporciona un servidor web embebido y autoconfiguración, acelerando el desarrollo de APIs RESTful.' },
+                        { term: 'Spring Data JPA', def: 'Un subproyecto de Spring que facilita la implementación de la capa de acceso a datos en aplicaciones Java. Reduce la necesidad de escribir código repetitivo para las operaciones de base de datos mediante el patrón de Repositorio.' },
+                        { term: 'Streamlit', def: 'Un framework de **Python** de código abierto que permite crear y compartir aplicaciones web para ciencia de datos y machine learning de forma rápida y sencilla. Es la tecnología base del Panel de Gestión.' },
+                        { term: 'Streamlit Cloud', def: 'La plataforma oficial para desplegar, gestionar y compartir aplicaciones de Streamlit. Se utiliza para alojar y hacer accesible públicamente el Panel de Gestión del proyecto.' },
+                        { term: 'Tailwind CSS', def: 'Un framework de CSS de tipo "**utility-first**" que permite construir diseños complejos directamente en el HTML mediante clases de utilidad, en lugar de escribir CSS personalizado. Acelera el desarrollo de interfaces de usuario modernas y responsivas.' },
+                        { term: 'TypeScript', def: 'Un superconjunto de JavaScript que añade tipado estático opcional. Se utilizó en el front-end de Next.js para mejorar la robustez del código, facilitar el mantenimiento y detectar errores en tiempo de desarrollo.' },
+                        { term: 'Única Fuente de Verdad (Single Source of Truth)', def: 'Un principio arquitectónico clave del proyecto, donde la **API Central es la única entidad** responsable de la lógica y la persistencia de los datos. Esto garantiza la consistencia y la integridad de la información en todo el ecosistema.' },
+                        { term: 'Vercel', def: 'Una plataforma en la nube optimizada para el despliegue de **aplicaciones front-end y serverless**, especialmente las construidas con Next.js. Se utiliza para alojar la plataforma web de cara al cliente.' }
                     ].sort((a, b) => a.term.localeCompare(b.term));
+                    
                     const glossaryHTML = glossaryTerms.map(item => `<div class="border-b border-gray-200 pb-4 mb-4"><h3 class="font-bold text-xl text-amber-700">${item.term}</h3><p class="text-gray-600">${item.def}</p></div>`).join('');
 
                     const contentMap = {
                         overview: `<h2 class="text-4xl font-bold mb-6" style="font-family: var(--font-display);">Visión General del Proyecto</h2><div class="bg-white p-8 rounded-2xl shadow-lg space-y-8"><div><h3 class="text-2xl font-semibold mb-3 text-amber-600">1. Resumen del Proyecto</h3><p class="text-lg leading-relaxed text-gray-700"><strong>Kingdom Barber</strong> nace como una <strong>plataforma digital integral</strong>, diseñada para transformar y modernizar la gestión de barberías. Su objetivo es ofrecer una solución robusta que simplifique la administración de citas, enriquezca la interacción con el cliente y proporcione herramientas avanzadas para la toma de decisiones estratégicas.</p></div><div class="border-t pt-8"><h3 class="text-2xl font-semibold mb-3 text-amber-600">2. Planteamiento del Problema</h3><p class="text-lg leading-relaxed text-gray-700">La gestión tradicional de barberías enfrenta desafíos en la era digital, como la dependencia de procesos manuales, una comunicación ineficiente y la falta de análisis de datos. Esto resulta en una menor eficiencia operativa y una experiencia que no cumple con las expectativas actuales de los clientes, quienes buscan <strong>comodidad, seguridad y personalización</strong>.</p></div><div class="border-t pt-8"><h3 class="text-2xl font-semibold mb-4 text-amber-600">3. Solución Propuesta</h3><p class="text-lg leading-relaxed text-gray-700">Kingdom Barber aborda estos desafíos mediante un <strong>ecosistema de aplicaciones</strong> que funcionan de manera sinérgica: una <strong>API Central (Java + Spring Boot)</strong> que actúa como el cerebro, una <strong>Plataforma Web para clientes (Next.js)</strong> y un <strong>Panel de Gestión y Análisis (Python/Streamlit)</strong>. Esta solución empodera a los dueños del negocio con herramientas de análisis de datos e IA.</p></div></div>`,
                         slideshow: `<h2 class="text-4xl font-bold mb-6" style="font-family: var(--font-display);">Presentación Detallada del Proyecto</h2><div class="bg-white p-6 rounded-2xl shadow-lg"><div class="slides-container" aria-live="polite">${slidesHTML}</div><div class="flex justify-between items-center mt-6"><button id="slideshow-prev" class="bg-stone-800 text-white px-5 py-2 rounded-lg hover:bg-black transition disabled:opacity-50" aria-label="Diapositiva anterior">&larr; Anterior</button><span id="slideshow-counter" class="font-semibold text-lg text-gray-700">Diapositiva 1 de ${this.slidesData.length}</span><button id="slideshow-next" class="bg-amber-500 text-white px-5 py-2 rounded-lg hover:bg-amber-600 transition" aria-label="Siguiente diapositiva">Siguiente &rarr;</button></div></div>`,
-                        architecture: `<h2 class="text-4xl font-bold mb-6" style="font-family: var(--font-display);">Arquitectura y Tecnologías</h2><div class="bg-white p-8 rounded-2xl shadow-lg"><p class="text-lg mb-8 text-gray-700 leading-relaxed">El proyecto está diseñado bajo una <strong>arquitectura de servicios desacoplados</strong>, donde cada componente tiene una responsabilidad única. El núcleo del sistema es la API Central de Java, que centraliza toda la lógica de negocio y los datos, sirviendo a múltiples clientes frontend de forma independiente.</p><div id="tabs" class="flex border-b border-gray-200 mb-6" role="tablist" aria-label="Módulos"><button class="tab py-3 px-6 text-gray-500 focus:outline-none text-lg active" data-target="module-api" role="tab" aria-selected="true">🧠 API Central (Java)</button><button class="tab py-3 px-6 text-gray-500 focus:outline-none text-lg" data-target="module-web" role="tab" aria-selected="false">🌐 Plataforma Web (Next.js)</button><button class="tab py-3 px-6 text-gray-500 focus:outline-none text-lg" data-target="module-dashboard" role="tab" aria-selected="false">📊 Panel de Gestión (Python)</button></div><div id="tab-content" aria-live="polite" class="min-h-[400px]"></div></div>`,
+                        // CONTENIDO MEJORADO PARA LA SECCIÓN DE ARQUITECTURA
+                        architecture: `
+                            <h2 class="text-4xl font-bold mb-6" style="font-family: var(--font-display);">Arquitectura y Tecnologías</h2>
+                            <div class="bg-white p-8 rounded-2xl shadow-lg">
+                                <p class="text-lg mb-8 text-gray-700 leading-relaxed">El proyecto está diseñado bajo una <strong>arquitectura de servicios desacoplados</strong>, donde cada componente tiene una responsabilidad única. El núcleo del sistema es la API Central de Java, que centraliza toda la lógica de negocio y los datos, sirviendo a múltiples clientes frontend de forma independiente.</p>
+                                
+                                <div class="mb-10 p-6 bg-gray-50 rounded-lg border border-gray-200">
+                                    <h3 class="text-xl font-semibold text-center mb-6 text-gray-800">Diagrama de la Arquitectura Desacoplada</h3>
+                                    <div class="relative flex items-center justify-center py-10">
+                                        
+                                        <!-- Clientes Frontend -->
+                                        <div class="flex flex-col space-y-12">
+                                            <div class="bg-gradient-to-br from-blue-100 to-white border-2 border-blue-200 rounded-xl p-6 text-center shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl w-64">
+                                                <div class="text-4xl mb-3">🌐</div>
+                                                <h4 class="text-xl font-bold text-blue-800">Plataforma Web</h4>
+                                                <p class="text-blue-600 font-semibold">(Next.js / React)</p>
+                                            </div>
+                                            <div class="bg-gradient-to-br from-green-100 to-white border-2 border-green-200 rounded-xl p-6 text-center shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl w-64">
+                                                <div class="text-4xl mb-3">📊</div>
+                                                <h4 class="text-xl font-bold text-green-800">Panel de Gestión</h4>
+                                                <p class="text-green-600 font-semibold">(Python / Streamlit)</p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Líneas de comunicación -->
+                                        <div class="absolute left-64 top-24 w-24">
+                                             <div class="arch-diagram-line w-full"></div>
+                                             <div class="absolute -right-2 -top-2 text-gray-500 text-3xl">›</div>
+                                             <div class="absolute left-4 -top-6 text-gray-600 text-sm font-semibold">Peticiones HTTP</div>
+                                        </div>
+                                         <div class="absolute left-64 bottom-24 w-24">
+                                             <div class="arch-diagram-line w-full"></div>
+                                             <div class="absolute -right-2 -top-2 text-gray-500 text-3xl">›</div>
+                                             <div class="absolute left-6 top-4 text-gray-600 text-sm font-semibold">Consume API</div>
+                                        </div>
+
+                                        <!-- API Central -->
+                                        <div class="ml-24 bg-gradient-to-br from-gray-800 to-black border-2 border-amber-400 rounded-xl p-8 text-center shadow-2xl flex flex-col justify-center items-center w-72 h-72 transform transition-transform duration-300 hover:scale-105">
+                                            <div class="text-5xl mb-4">🧠</div>
+                                            <h4 class="text-2xl font-bold text-white">API Central</h4>
+                                            <p class="text-amber-400 font-semibold mb-3">(Java / Spring Boot)</p>
+                                            <span class="bg-amber-400 text-black text-xs font-bold px-3 py-1 rounded-full">ÚNICA FUENTE DE VERDAD</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="tabs" class="flex border-b border-gray-200 mb-6" role="tablist" aria-label="Módulos">
+                                    <button class="tab py-3 px-6 text-gray-500 focus:outline-none text-lg active" data-target="module-api" role="tab" aria-selected="true">🧠 API Central (Java)</button>
+                                    <button class="tab py-3 px-6 text-gray-500 focus:outline-none text-lg" data-target="module-web" role="tab" aria-selected="false">🌐 Plataforma Web (Next.js)</button>
+                                    <button class="tab py-3 px-6 text-gray-500 focus:outline-none text-lg" data-target="module-dashboard" role="tab" aria-selected="false">📊 Panel de Gestión (Python)</button>
+                                </div>
+                                <div id="tab-content" aria-live="polite" class="min-h-[400px]"></div>
+                            </div>`,
                         'data-flow': `<h2 class="text-4xl font-bold mb-6" style="font-family: var(--font-display);">Flujo de Datos: Creación de una Cita</h2><div class="bg-white p-8 rounded-2xl shadow-lg"><p class="text-lg mb-6 text-gray-700">Este es un ejemplo del flujo de datos cliente-servidor al agendar una cita en el nuevo ecosistema. Navega paso a paso para ver cómo los componentes interactúan a través de la API Central.</p><div class="flex justify-between items-center mb-8"><button id="prev-step" class="bg-stone-800 text-white px-5 py-2 rounded-lg hover:bg-black transition disabled:opacity-50"> &larr; Anterior</button><span id="step-counter" class="font-semibold text-lg text-gray-700"></span><button id="next-step" class="bg-amber-500 text-white px-5 py-2 rounded-lg hover:bg-amber-600 transition">Siguiente &rarr;</button></div><div id="flow-steps-container" class="space-y-4"></div></div>`,
                         objectives: `<h2 class="text-4xl font-bold mb-6" style="font-family: var(--font-display);">Objetivos del Proyecto</h2><div class="bg-white p-8 rounded-2xl shadow-lg mb-8"><h3 class="font-semibold text-2xl mb-3 text-amber-600">Objetivo General</h3><p class="text-lg leading-relaxed">Desarrollar un ecosistema de software completo y desacoplado que modernice la gestión operativa de Kingdom Barber, mejore la experiencia del cliente a través de una plataforma web intuitiva y proporcione herramientas de inteligencia de negocios para la toma de decisiones estratégicas basadas en datos.</p></div><div class="bg-white p-8 rounded-2xl shadow-lg"><h3 class="font-semibold text-2xl mb-6 text-amber-600">Objetivos Específicos</h3><div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6"><div class="flex items-start"><span class="mr-4 text-2xl text-amber-500">🧠</span><div><strong class="block text-gray-800 text-lg">Centralizar la Lógica de Negocio:</strong> Construir una API RESTful en Java con Spring Boot que actúe como la única fuente de verdad para todos los datos.</div></div><div class="flex items-start"><span class="mr-4 text-2xl text-amber-500">🌐</span><div><strong class="block text-gray-800 text-lg">Ofrecer una Experiencia Moderna:</strong> Desarrollar una aplicación web cliente (PI_WEB2) con Next.js que permita agendar citas en un calendario interactivo.</div></div><div class="flex items-start"><span class="mr-4 text-2xl text-amber-500">📊</span><div><strong class="block text-gray-800 text-lg">Empoderar la Gestión con Datos:</strong> Crear un panel de administración (PI_NTP) en Python con Streamlit que ofrezca dashboards interactivos y KPIs en tiempo real.</div></div><div class="flex items-start"><span class="mr-4 text-2xl text-amber-500">🤖</span><div><strong class="block text-gray-800 text-lg">Integrar Inteligencia Artificial:</strong> Implementar un Asistente de IA (Gemini) en el panel de gestión para generar análisis y proponer estrategias.</div></div></div></div>`,
                         conclusions: `<h2 class="text-4xl font-bold mb-6" style="font-family: var(--font-display);">Conclusiones y Lecciones Aprendidas</h2><div class="bg-white p-8 rounded-2xl shadow-lg space-y-6 text-lg text-gray-700"><p>La decisión de migrar y consolidar el ecosistema bajo una <strong>única API Central en Java</strong> ha sido el paso más importante hacia la creación de una solución tecnológica robusta, escalable y profesional. El proyecto ha concluido exitosamente, cumpliendo con los objetivos de modernización y sentando una base sólida para el futuro.</p><div class="space-y-4"><div class="p-6 bg-gray-50 rounded-lg border-l-4 border-amber-400"><h4 class="font-bold text-gray-800 mb-2">Desafíos de Integración Multi-Tecnológica</h4><p>La principal dificultad fue asegurar una comunicación fluida entre el back-end de Java y los front-ends de React y Python. Se superaron obstáculos como la configuración de CORS, el manejo de inconsistencias en los formatos de datos (ej. \`camelCase\` vs. \`Pascal_Case\`), y la depuración de errores de red a través de diferentes stacks. Esto reforzó la importancia de establecer un "contrato de API" claro y estable desde el inicio.</p></div><div class="p-6 bg-gray-50 rounded-lg border-l-4 border-amber-400"><h4 class="font-bold text-gray-800 mb-2">Lecciones sobre la Persistencia y Manejo de Archivos</h4><p>La transición de archivos planos (\`.json\`) a un modelo de persistencia con JPA/Hibernate fue un reto conceptual clave. Adicionalmente, el plan inicial de servir imágenes desde una carpeta en Spring Boot se encontró con problemas de configuración inesperados (\`400 Bad Request\`). Esto llevó a un <strong>replanteamiento estratégico</strong> hacia una solución más robusta y moderna: convertir las imágenes a formato Base64, eliminando por completo los problemas de rutas y simplificando la arquitectura.</p></div><div class="p-6 bg-gray-50 rounded-lg border-l-4 border-amber-400"><h4 class="font-bold text-gray-800 mb-2">Comunicación y Sincronización del Equipo</h4><p>Al tener tres proyectos interconectados, la coordinación fue fundamental. Cualquier cambio en la API de Java tenía un impacto directo en los dos proyectos front-end. Esto subrayó la necesidad de una comunicación constante, un control de versiones riguroso y la realización de pruebas de integración continuas para evitar bloqueos y asegurar que el trabajo en paralelo fuera eficiente.</p></div></div><p class="pt-6 border-t border-gray-200 mt-6 font-semibold text-gray-800">En conclusión, el proyecto no solo ha entregado un ecosistema tecnológico funcional, sino que también ha servido como una valiosa experiencia en la gestión de un proyecto de software complejo y multi-tecnológico, demostrando un dominio de arquitecturas de software contemporáneas y prácticas de desarrollo ágiles.</p></div>`,
+                        deployment: `
+                            <h2 class="text-4xl font-bold mb-6" style="font-family: var(--font-display);">Despliegue y Acceso a las Plataformas</h2>
+                            <div class="bg-white p-8 rounded-2xl shadow-lg">
+                                <p class="text-lg leading-relaxed text-gray-700 mb-8">El ecosistema de Kingdom Barber está compuesto por tres aplicaciones independientes, cada una desplegada en una plataforma optimizada para su tecnología. A continuación, se detallan los enlaces para acceder a cada componente del proyecto.</p>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    <div class="border border-gray-200 rounded-xl p-6 flex flex-col hover:shadow-xl hover:border-blue-400 transition-all duration-300">
+                                        <div class="text-4xl mb-3">🌐</div>
+                                        <h3 class="text-2xl font-bold text-blue-800">Plataforma Web</h3>
+                                        <p class="text-gray-500 mb-3 text-sm">Desplegado en Vercel</p>
+                                        <p class="text-gray-600 mb-4 flex-grow">Interfaz para clientes y barberos, construida con <strong>Next.js y React</strong>. Permite el agendamiento de citas y la gestión de galerías.</p>
+                                        <a href="https://pi-web2-six.vercel.app/" target="_blank" class="mt-auto bg-blue-600 text-white text-center font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">Acceder a la Web</a>
+                                    </div>
+                                    <div class="border border-gray-200 rounded-xl p-6 flex flex-col hover:shadow-xl hover:border-green-400 transition-all duration-300">
+                                        <div class="text-4xl mb-3">📊</div>
+                                        <h3 class="text-2xl font-bold text-green-800">Panel de Gestión</h3>
+                                        <p class="text-gray-500 mb-3 text-sm">Desplegado en Streamlit Cloud</p>
+                                        <p class="text-gray-600 mb-4 flex-grow">Herramienta de BI con <strong>Python y Streamlit</strong> para análisis de datos, KPIs y el asistente de Inteligencia Artificial.</p>
+                                        <a href="https://kingdombarberdashboard.streamlit.app/" target="_blank" class="mt-auto bg-green-600 text-white text-center font-bold py-2 px-4 rounded-lg hover:bg-green-700 transition-colors">Ir al Dashboard</a>
+                                    </div>
+                                    <div class="border border-gray-200 rounded-xl p-6 flex flex-col hover:shadow-xl hover:border-gray-400 transition-all duration-300">
+                                        <div class="text-4xl mb-3">🧠</div>
+                                        <h3 class="text-2xl font-bold text-gray-800">API Central</h3>
+                                        <p class="text-gray-500 mb-3 text-sm">Desplegado en Render</p>
+                                        <p class="text-gray-600 mb-4 flex-grow">El cerebro del sistema en <strong>Java y Spring Boot</strong>. Provee los datos a todas las aplicaciones. El link lleva a un endpoint de prueba.</p>
+                                        <a href="https://pi-movil2-0.onrender.com/sedes" target="_blank" class="mt-auto bg-gray-700 text-white text-center font-bold py-2 px-4 rounded-lg hover:bg-gray-800 transition-colors">Probar API</a>
+                                    </div>
+                                </div>
+                            </div>`,
                         glossary: `<h2 class="text-4xl font-bold mb-6" style="font-family: var(--font-display);">Glosario Técnico Extendido</h2><div class="bg-white p-8 rounded-2xl shadow-lg"><div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 text-lg">${glossaryHTML}</div></div>`
                     };
                     return contentMap[sectionId] || '';
                 },
 
                 renderLayoutAndContent() {
+                    this.elements.mainNav.innerHTML = '';
+                    this.elements.mainContent.innerHTML = '';
                     this.sectionsData.forEach(section => {
                         const navLink = document.createElement('a');
                         navLink.href = `#${section.id}`;
@@ -336,7 +452,7 @@
                         });
                     });
                 },
-
+                
                 initInteractiveComponents() {
                     this.initSlideshow();
                     this.initDataFlow();
@@ -376,17 +492,17 @@
                     nextBtn.addEventListener('click', () => currentIndex < slides.length - 1 && showSlide(currentIndex + 1));
                     updateButtons();
                 },
-
+                
                 initDataFlow() {
                     const container = document.getElementById('data-flow');
                     if (!container) return;
                     let currentStep = 0;
                     const steps = [
                         { title: '1. Cliente (Front-End - PI_WEB2)', desc: 'Un usuario rellena el formulario de agendamiento en la interfaz de Next.js. El componente React empaqueta los datos en un objeto JSON.' },
-                        { title: '2. Petición HTTP (POST)', desc: 'El front-end envía una petición POST al endpoint <code>/citas-activas</code> de la API de Java (<code>http://localhost:8080</code>) usando la Fetch API.' },
+                        { title: '2. Petición HTTP (POST)', desc: 'El front-end envía una petición POST al endpoint <code>/citas-activas</code> de la API de Java (<code>https://pi-movil2-0.onrender.com</code>) usando la Fetch API.' },
                         { title: '3. Controlador (API Java)', desc: 'La clase <code>AgendamientoController</code> en Spring Boot recibe la petición. Spring convierte automáticamente el JSON en un objeto Java <code>NuevaCita</code>.' },
                         { title: '4. Lógica y Persistencia (JPA)', desc: 'El controlador enriquece los datos (ej. añade el nombre de la sede) y llama a <code>nuevaCitaRepository.save()</code>. Spring Data JPA genera la sentencia SQL <code>INSERT</code>.' },
-                        { title: '5. Base de Datos (H2)', desc: 'La nueva cita se guarda como una nueva fila en la tabla <code>NUEVAS_CITAS</code> de la base de datos en memoria H2.' },
+                        { title: '5. Base de Datos (PostgreSQL)', desc: 'La nueva cita se guarda como una nueva fila en la tabla de la base de datos de producción en Render.' },
                         { title: '6. Respuesta de la API', desc: 'La API devuelve el objeto de la cita recién guardada como un JSON al front-end, con un código de estado <code>200 OK</code>.' },
                         { title: '7. Actualización de UI (React)', desc: 'El front-end recibe la confirmación, actualiza su estado interno y la interfaz se re-renderiza para mostrar la cita recién agendada en el calendario.' }
                     ];
@@ -396,6 +512,7 @@
                     const counter = container.querySelector('#step-counter');
                     if (!stepsContainer || !prevBtn || !nextBtn || !counter) return;
 
+                    stepsContainer.innerHTML = ''; 
                     steps.forEach((step) => {
                         stepsContainer.innerHTML += `<div class="flow-step p-6 rounded-lg bg-gray-50 border-l-4"><h3 class="font-bold text-xl mb-2">${step.title}</h3><p class="text-gray-600 text-lg">${step.desc}</p></div>`;
                     });
@@ -411,16 +528,16 @@
                     nextBtn.addEventListener('click', () => { if (currentStep < steps.length - 1) { currentStep++; updateView(); } });
                     updateView();
                 },
-
+                
                 initModulesTabs() {
-                    const container = document.getElementById('architecture'); // Changed from 'modules-stack'
+                    const container = document.getElementById('architecture');
                     if (!container) return;
                     const tabs = container.querySelectorAll('.tab');
                     const contentContainer = container.querySelector('#tab-content');
                     if (!tabs.length || !contentContainer) return;
 
                     const tabContents = {
-                        'module-api': `<div class="grid grid-cols-1 md:grid-cols-3 gap-6"><div class="md:col-span-2"><h3 class="font-bold text-2xl mb-4 text-amber-700">API Central (Java + Spring Boot)</h3><p class="text-lg mb-4">Es el corazón y cerebro del sistema. Gestiona toda la lógica, los datos y la seguridad a través de una API RESTful.</p><h4 class="font-semibold text-xl mb-2">Funcionalidades Principales:</h4><ul class="list-disc list-inside space-y-2 text-lg"><li>Endpoints RESTful para el CRUD de todas las entidades.</li><li>Lógica de negocio para enriquecer datos antes de guardarlos.</li><li>Almacenamiento de imágenes como Base64 en la base de datos.</li><li>Configuración de CORS para comunicación segura.</li></ul></div><div class="bg-amber-50 p-4 rounded-lg"><h4 class="font-semibold text-xl mb-2 text-amber-800">Stack Tecnológico</h4><ul class="list-disc list-inside space-y-2"><li><strong>Lenguaje:</strong> Java 17+</li><li><strong>Framework:</strong> Spring Boot</li><li><strong>Persistencia:</strong> Spring Data JPA, Hibernate</li><li><strong>Base de Datos:</strong> H2 (en memoria)</li><li><strong>Build Tool:</strong> Maven</li><li><strong>Utilidades:</strong> Lombok</li></ul></div></div>`,
+                        'module-api': `<div class="grid grid-cols-1 md:grid-cols-3 gap-6"><div class="md:col-span-2"><h3 class="font-bold text-2xl mb-4 text-amber-700">API Central (Java + Spring Boot)</h3><p class="text-lg mb-4">Es el corazón y cerebro del sistema. Gestiona toda la lógica, los datos y la seguridad a través de una API RESTful.</p><h4 class="font-semibold text-xl mb-2">Funcionalidades Principales:</h4><ul class="list-disc list-inside space-y-2 text-lg"><li>Endpoints RESTful para el CRUD de todas las entidades.</li><li>Lógica de negocio para enriquecer datos antes de guardarlos.</li><li>Almacenamiento de imágenes como Base64 en la base de datos.</li><li>Configuración de CORS para comunicación segura.</li></ul></div><div class="bg-amber-50 p-4 rounded-lg"><h4 class="font-semibold text-xl mb-2 text-amber-800">Stack Tecnológico</h4><ul class="list-disc list-inside space-y-2"><li><strong>Lenguaje:</strong> Java 17+</li><li><strong>Framework:</strong> Spring Boot</li><li><strong>Persistencia:</strong> Spring Data JPA, Hibernate</li><li><strong>Base de Datos:</strong> PostgreSQL (Producción)</li><li><strong>Build Tool:</strong> Maven</li><li><strong>Contenerización:</strong> Docker</li></ul></div></div>`,
                         'module-web': `<div class="grid grid-cols-1 md:grid-cols-3 gap-6"><div class="md:col-span-2"><h3 class="font-bold text-2xl mb-4 text-blue-700">Plataforma Web (Next.js)</h3><p class="text-lg mb-4">La cara visible del proyecto, construida con <strong>Next.js, React y TypeScript</strong> para una experiencia de usuario excepcional. Consume la API de Java para todas sus operaciones.</p><h4 class="font-semibold text-xl mb-2">Funcionalidades Principales:</h4><ul class="list-disc list-inside space-y-2 text-lg"><li>Sistema de Reservas avanzado con calendario interactivo.</li><li>Galería de trabajos con subida y edición de imágenes.</li><li>Panel para Barberos donde visualizan su agenda.</li><li>Autenticación de usuarios con Clerk.</li></ul></div><div class="bg-blue-50 p-4 rounded-lg"><h4 class="font-semibold text-xl mb-2 text-blue-800">Stack Tecnológico</h4><ul class="list-disc list-inside space-y-2"><li><strong>Framework:</strong> Next.js, React</li><li><strong>Lenguaje:</strong> TypeScript</li><li><strong>Estilos:</strong> Tailwind CSS</li><li><strong>Autenticación:</strong> Clerk</li><li><strong>Componentes:</strong> React Big Calendar, Headless UI</li></ul></div></div>`,
                         'module-dashboard': `<div class="grid grid-cols-1 md:grid-cols-3 gap-6"><div class="md:col-span-2"><h3 class="font-bold text-2xl mb-4 text-green-700">Panel de Gestión (Python + Streamlit)</h3><p class="text-lg mb-4">Herramienta estratégica en <strong>Python con Streamlit</strong>, diseñada para el análisis de datos y la administración. Consume la API de Java.</p><h4 class="font-semibold text-xl mb-2">Funcionalidades Principales:</h4><ul class="list-disc list-inside space-y-2 text-lg"><li>Dashboard interactivo con KPIs y filtros en tiempo real.</li><li>Gestión y consulta del historial completo de citas.</li><li>Asistente de IA (Gemini) para generar reportes, chatear con los datos y crear estrategias de marketing.</li></ul></div><div class="bg-green-50 p-4 rounded-lg"><h4 class="font-semibold text-xl mb-2 text-green-800">Stack Tecnológico</h4><ul class="list-disc list-inside space-y-2"><li><strong>Framework:</strong> Streamlit</li><li><strong>Lenguaje:</strong> Python</li><li><strong>Análisis:</strong> Pandas</li><li><strong>Visualización:</strong> Plotly Express</li><li><strong>Reportes:</strong> FPDF2</li><li><strong>IA:</strong> Google Generative AI</li></ul></div></div>`
                     };
@@ -443,3 +560,4 @@
 </body>
 
 </html>
+
